@@ -17,6 +17,7 @@ package OpenQA::WebAPI::Controller::API::V1::Job;
 use Mojo::Base 'Mojolicious::Controller';
 
 use OpenQA::Utils;
+use OpenQA::Settings;
 use OpenQA::Jobs::Constants;
 use OpenQA::Resource::Jobs;
 use OpenQA::Schema::Result::Jobs;
@@ -236,10 +237,12 @@ sub create {
 
     my $json = {};
     my $status;
-    my $new_params = $self->_generate_job_setting(\%params);
+    my $result = $self->_generate_job_setting(\%params);
+    return $self->render(json => {error => $result->{expand_result}}, status => 400)
+      if defined $result->{expand_result};
 
     try {
-        my $job = $self->schema->resultset('Jobs')->create_from_settings($new_params);
+        my $job = $self->schema->resultset('Jobs')->create_from_settings($result->{settings_result});
         $self->emit_event('openqa_job_create', {id => $job->id, %params});
         $json->{id} = $job->id;
 
@@ -755,10 +758,10 @@ sub _generate_job_setting {
     my ($self, $args) = @_;
     my $schema = $self->schema;
 
-    my %settings;    #include the machine, product, and test suit setting belongs to this job.
-    my @classes;     #if the machine or product has worker_class setting, push them to this array.
+    my %settings;    # Machines, product and test suite settings for the job
+    my @classes;     # Populated with WORKER_CLASS settings from machines and products
 
-    #if args includes DISTRI, VERSION, FLAVOR, ARCH, get product setting.
+    # Populated with Product settins if there are DISTRI, VERSION, FLAVOR, ARCH in arguments.
     if (   defined $args->{DISTRI}
         && defined $args->{VERSION}
         && defined $args->{FLAVOR}
@@ -782,7 +785,7 @@ sub _generate_job_setting {
         }
     }
 
-    #if args includes MACHINE, get machine setting.
+    # Populated with machine settings if there is MACHINE in arguments.
     if (defined $args->{MACHINE}) {
         my $machines = $schema->resultset('Machines')->search(
             {
@@ -799,7 +802,7 @@ sub _generate_job_setting {
         }
     }
 
-    #TEST is mandatory, find the test suit settings.
+    # TEST is mandatory, so populate with TestSuit settings.
     my $test_suites = $schema->resultset('TestSuites')->search(
         {
             name => $args->{TEST},
@@ -822,7 +825,8 @@ sub _generate_job_setting {
         $settings{uc $_} = $args->{$_};
     }
 
-    return OpenQA::Utils::reset_settings(\%settings);
+    my $expand_result = OpenQA::Settings::expand_placeholders(\%settings);
+    return {expand_result => $expand_result, settings_result => \%settings};
 }
 
 1;

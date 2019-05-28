@@ -25,6 +25,7 @@ use DBIx::Class::Timestamps 'now';
 use File::Basename;
 use Try::Tiny;
 use OpenQA::Utils;
+use OpenQA::Settings;
 use OpenQA::JobDependencies::Constants;
 use OpenQA::Scheduler::Client;
 use Mojo::JSON qw(encode_json decode_json);
@@ -219,7 +220,9 @@ sub _schedule_iso {
     # Any arg name ending in _URL is special: it tells us to download
     # the file at that URL before running the job
     my $downloads = create_downloads_list($args);
-    my $jobs      = $self->_generate_jobs($args, \@notes);
+    my $result    = $self->_generate_jobs($args, \@notes);
+    return {error => $result->{expand_result}} if defined $result->{expand_result};
+    my $jobs = $result->{settings_result};
 
     # take some attributes from the first job to guess what old jobs to cancel
     # note: We should have distri object that decides which attributes are relevant here.
@@ -508,6 +511,7 @@ sub _generate_jobs {
     # allow overriding the priority
     my $priority = delete $args->{_PRIORITY};
 
+    my $expand_result;
     for my $product (@products) {
         # find job templates
         my $templates = $product->job_templates;
@@ -566,23 +570,23 @@ sub _generate_jobs {
 
             # variable expansion
             # replace %NAME% with $settings{NAME}
-            my $new_settings = OpenQA::Utils::reset_settings(\%settings);
+            $expand_result = OpenQA::Settings::expand_placeholders(\%settings);
 
-            if (!$args->{MACHINE} || $args->{MACHINE} eq $new_settings->{MACHINE}) {
+            if (!$args->{MACHINE} || $args->{MACHINE} eq $settings{MACHINE}) {
                 if (!@tests) {
-                    $wanted{_settings_key($new_settings)} = 1;
+                    $wanted{_settings_key(\%settings)} = 1;
                 }
                 else {
                     foreach my $test (@tests) {
-                        if ($test eq $new_settings->{TEST}) {
-                            $wanted{_settings_key($new_settings)} = 1;
+                        if ($test eq $settings{TEST}) {
+                            $wanted{_settings_key(\%settings)} = 1;
                             last;
                         }
                     }
                 }
             }
 
-            push @$ret, $new_settings;
+            push @$ret, \%settings;
         }
     }
 
@@ -603,7 +607,7 @@ sub _generate_jobs {
             splice @$ret, $i, 1;    # not wanted - delete
         }
     }
-    return $ret;
+    return {expand_result => $expand_result, settings_result => $ret};
 }
 
 =over 4

@@ -693,16 +693,16 @@ subtest 'TEST is only mandatory parameter' => sub {
     $t->json_is('/job/settings/DISTRI'  => undef);
 };
 
-subtest 'Expand specified Machine, Testsuit, Product variables' => sub {
+subtest 'Expand specified Machine, Testsuite, Product variables' => sub {
     my $products = $t->app->schema->resultset('Products');
     $products->create(
         {
-            version     => 'Tumbleweed',
+            version     => '15-SP1',
             name        => '',
-            distri      => 'opensuse',
+            distri      => 'sle',
             arch        => 'x86_64',
             description => '',
-            flavor      => 'DVD',
+            flavor      => 'Installer-DVD',
             settings    => [
                 {key => 'BUILD_SDK',           value => '%BUILD%'},
                 {key => 'BETA',                value => '1'},
@@ -710,6 +710,18 @@ subtest 'Expand specified Machine, Testsuit, Product variables' => sub {
                 {key => 'BUILD_HA',            value => '%BUILD%'},
                 {key => 'BUILD_SES',           value => '%BUILD%'},
                 {key => 'SHUTDOWN_NEEDS_AUTH', value => '1'},
+                {
+                    key   => 'HDD_1',
+                    value => 'SLES-%VERSION%-%ARCH%-%BUILD%@%MACHINE%-minimal_with_sdk%BUILD_SDK%_installed.qcow2'
+                },
+                {
+                    key   => 'PUBLISH_HDD_1',
+                    value => 'SLES-%VERSION%-%ARCH%-%BUILD%@%MACHINE%-minimal_with_sdk%BUILD_SDK%_installed.qcow2'
+                },
+                {
+                    key   => 'ANOTHER_JOB',
+                    value => 'SLES-%VERSION%-%ARCH%-%BUILD%@%MACHINE%-minimal_with_sdk%BUILD_SDK%_installed.qcow2'
+                },
             ],
         });
     my $testsuites = $t->app->schema->resultset('TestSuites');
@@ -726,30 +738,36 @@ subtest 'Expand specified Machine, Testsuit, Product variables' => sub {
             ],
         });
 
-    delete $jobs_post_params{_GROUP_ID};
-    delete $jobs_post_params{WORKER_CLASS};
-    $jobs_post_params{_GROUP} = 'opensuse';
-    $jobs_post_params{ARCH}   = 'x86_64';
-    $jobs_post_params{TEST}   = 'autoupgrade';
+    my %new_jobs_post_params = (
+        iso     => 'SLE-%VERSION%-%FLAVOR%-%MACHINE%-Build%BUILD%-Media1.iso',
+        DISTRI  => 'sle',
+        VERSION => '15-SP1',
+        FLAVOR  => 'Installer-DVD',
+        ARCH    => 'x86_64',
+        TEST    => 'autoupgrade',
+        MACHINE => '64bit',
+        BUILD   => '1234',
+        _GROUP  => 'opensuse',
+    );
 
-    $post = $t->post_ok('/api/v1/jobs', form => \%jobs_post_params)->status_is(200);
+    $post = $t->post_ok('/api/v1/jobs', form => \%new_jobs_post_params)->status_is(200);
     my $result = $jobs->find($post->tx->res->json->{id})->settings_hash;
     delete $result->{NAME};
     is_deeply(
         $result,
         {
             'QEMUCPU'             => 'qemu64',
-            'VERSION'             => 'Tumbleweed',
-            'DISTRI'              => 'opensuse',
+            'VERSION'             => '15-SP1',
+            'DISTRI'              => 'sle',
             'MACHINE'             => '64bit',
-            'FLAVOR'              => 'DVD',
+            'FLAVOR'              => 'Installer-DVD',
             'ARCH'                => 'x86_64',
             'BUILD'               => '1234',
             'ISO_MAXSIZE'         => '4700372992',
             'INSTALLONLY'         => 1,
             'WORKER_CLASS'        => 'qemu_x86_64',
             'DESKTOP'             => 'gnome',
-            'ISO'                 => 'openSUSE-Tumbleweed-DVD-x86_64-Current.iso',
+            'ISO'                 => 'SLE-15-SP1-Installer-DVD-64bit-Build1234-Media1.iso',
             'BUILD_HA'            => '1234',
             'TEST'                => 'autoupgrade',
             'BETA'                => 1,
@@ -758,10 +776,71 @@ subtest 'Expand specified Machine, Testsuit, Product variables' => sub {
             'SHUTDOWN_NEEDS_AUTH' => 1,
             'PATCH'               => 1,
             'UPGRADE'             => 1,
+            'PUBLISH_HDD_1'       => 'SLES-15-SP1-x86_64-1234@64bit-minimal_with_sdk1234_installed.qcow2',
+            'ANOTHER_JOB'         => 'SLES-15-SP1-x86_64-1234@64bit-minimal_with_sdk1234_installed.qcow2',
+            'HDD_1'               => 'SLES-15-SP1-x86_64-1234@64bit-minimal_with_sdk1234_installed.qcow2',
         },
         'Job post method expand specified MACHINE, PRODUCT, TESTSUIT variable',
     );
 };
+
+subtest 'circular reference settings' => sub {
+    my $products = $t->app->schema->resultset('Products');
+    $products->create(
+        {
+            version     => '12-SP5',
+            name        => '',
+            distri      => 'sle',
+            arch        => 'x86_64',
+            description => '',
+            flavor      => 'Installer-DVD',
+            settings    => [
+                {key => 'BUILD_SDK',           value => '%BUILD_HA%'},
+                {key => 'BETA',                value => '1'},
+                {key => 'ISO_MAXSIZE',         value => '4700372992'},
+                {key => 'BUILD_HA',            value => '%BUILD%'},
+                {key => 'BUILD_SES',           value => '%BUILD%'},
+                {key => 'SHUTDOWN_NEEDS_AUTH', value => '1'},
+                {
+                    key   => 'PUBLISH_HDD_1',
+                    value => 'SLES-%VERSION%-%ARCH%-%BUILD%@%MACHINE%-minimal_with_sdk%BUILD_SDK%_installed.qcow2'
+                },
+            ],
+        });
+    my $testsuites = $t->app->schema->resultset('TestSuites');
+    $testsuites->create(
+        {
+            name        => 'circular',
+            description => '',
+            settings    => [
+                {key => 'DESKTOP',     value => 'gnome'},
+                {key => 'INSTALLONLY', value => '1'},
+                {key => 'MACHINE',     value => '64bit'},
+                {key => 'PATCH',       value => '1'},
+                {key => 'UPGRADE',     value => '1'},
+            ],
+        });
+
+    my %new_jobs_post_params = (
+        iso     => 'SLE-%VERSION%-%FLAVOR%-%MACHINE%-Build%BUILD%-Media1.iso',
+        DISTRI  => 'sle',
+        VERSION => '12-SP5',
+        FLAVOR  => 'Installer-DVD',
+        ARCH    => 'x86_64',
+        TEST    => 'circular',
+        MACHINE => '64bit',
+        BUILD   => '%BUILD_HA%',
+        _GROUP  => 'opensuse',
+    );
+
+    $t->post_ok('/api/v1/jobs', form => \%new_jobs_post_params)->status_is(400);
+    like(
+        $t->tx->res->json->{error},
+        qr/The key (\w+) contains a circular reference, its value is %\w+%/,
+        'circular reference exit successfully'
+    );
+};
+
 
 subtest 'error on insufficient params' => sub {
     $t->post_ok('/api/v1/jobs', form => {})->status_is(400);
