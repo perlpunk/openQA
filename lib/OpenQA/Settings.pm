@@ -21,35 +21,36 @@ use warnings;
 sub expand_placeholders {
     my ($settings) = @_;
 
-    my $error_string;
-
-    for my $value (values %$settings) {
+    for my $value (sort values %$settings) {
         next unless defined $value;
-
-        # loop the value until there is no %KEY% in it
-        while ($value =~ /%(\w+)%/) {
-            my $key = $1;
-            last unless defined $settings->{$key};
-
-            my $replaced_value = $settings->{$key};
-
-# used to record already replaced value. If the value has been in this array which means there is a circular reference, then return an error message.
-            my %replaced_hash;
-
-            while ($replaced_value =~ /%(\w+)%/) {
-                my $key_in_value = $1;
-                last unless defined $settings->{$key_in_value};
-
-                return "The key $key_in_value contains a circular reference, its value is " . $settings->{$key_in_value}
-                  if exists $replaced_hash{$key_in_value};
-
-                $replaced_value = $settings->{$key_in_value};
-                $replaced_hash{$key_in_value} = 1;
-            }
-            $value =~ s/(%$key%)/$replaced_value/;
+        my %seen;
+        eval {
+            $value =~ s/%(\w+)%/expand_placeholder($settings, $1, \%seen)/ge;
+        };
+        if ($@) {
+            return "Error: $@";
         }
     }
     return undef;
+}
+
+sub expand_placeholder {
+    my ($settings, $key, $global_seen) = @_;
+
+    unless (exists $settings->{ $key }) {
+        return '';
+    }
+    my %seen = %$global_seen;
+    # prevent circular replacement
+    if ($seen{ $key }++) {
+        die sprintf "The key %s contains a circular reference, its value is %s\n",
+            $key, $settings->{ $key };
+    }
+
+    my $value = $settings->{ $key };
+    $value =~ s/%(\w+)%/expand_placeholder($settings, $1, \%seen)/ge;
+
+    return $value;
 }
 
 1;
