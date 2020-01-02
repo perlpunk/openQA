@@ -488,12 +488,6 @@ sub prepare_job_results {
 
     my %test_suite_names = map { $_->id => ($settings_by_job_id{$_->id}->{TEST_SUITE_NAME} // $_->TEST) } @$jobs;
 
-    # prefetch descriptions from test suites
-    my %desc_args = (in => [values %test_suite_names]);
-    my @descriptions
-      = $self->schema->resultset('TestSuites')->search({name => \%desc_args}, {columns => [qw(name description)]});
-    my %descriptions = map { $_->name => $_->description } @descriptions;
-
     foreach my $job (@$jobs) {
         next if $states         && !$states->{$job->state};
         next if $results        && !$results->{$job->result};
@@ -535,7 +529,7 @@ sub prepare_job_results {
 
         # add description
         my $id          = $job->id;
-        my $description = $settings_by_job_id{$id}->{TEST_SUITE_DESCRIPTION} // $descriptions{$test_suite_names{$id}};
+        my $description = $settings_by_job_id{$id}->{TEST_SUITE_DESCRIPTION};
         $results{$distri}{$version}{$flavor}{$test}{description} //= $description;
     }
     return (\%archs, \%results, $aggregated);

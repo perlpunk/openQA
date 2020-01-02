@@ -537,13 +537,17 @@ sub _generate_jobs {
                 @settings{keys %settings_of_entity} = values %settings_of_entity;
             }
 
+            my $description = $job_template->description;
+            unless (length $description) {
+                $description = $job_template->test_suite->description // '';
+            }
             # add properties from dedicated database columns to settings
             $settings{TEST}                   = $job_template->name || $job_template->test_suite->name;
             $settings{MACHINE}                = $job_template->machine->name;
             $settings{BACKEND}                = $job_template->machine->backend;
             $settings{JOB_TEMPLATE_NAME}      = $job_template->name if $job_template->name;
             $settings{TEST_SUITE_NAME}        = $job_template->test_suite->name;
-            $settings{TEST_SUITE_DESCRIPTION} = $job_template->description if length $job_template->description;
+            $settings{TEST_SUITE_DESCRIPTION} = $description;
 
             # merge worker classes
             $settings{WORKER_CLASS} = @worker_classes ? join(',', sort(@worker_classes)) : "qemu_$args->{ARCH}";

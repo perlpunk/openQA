@@ -352,12 +352,13 @@ is_deeply(
         PRECEDENCE  => 'original',
         PUBLISH_HDD_1 => 'opensuse-13.1-i586-advanced_kde-qemu64.qcow2'
         ,    # variable expansion (using variable from job template level as well)
-        QEMUCPU          => 'qemu64',
-        START_AFTER_TEST => 'kde,textmode',
-        TEST             => 'advanced_kde',
-        VERSION          => '13.1',
-        WORKER_CLASS     => 'qemu_i586',
-        TEST_SUITE_NAME  => 'advanced_kde'
+        QEMUCPU                => 'qemu64',
+        START_AFTER_TEST       => 'kde,textmode',
+        TEST                   => 'advanced_kde',
+        VERSION                => '13.1',
+        WORKER_CLASS           => 'qemu_i586',
+        TEST_SUITE_NAME        => 'advanced_kde',
+        TEST_SUITE_DESCRIPTION => 'See kde for simple test',
     },
     'settings assigned as expected, variable expansion applied, taking job template settings into account'
 ) or diag explain $advanced_kde_64->{settings};
