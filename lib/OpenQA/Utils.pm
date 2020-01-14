@@ -33,6 +33,8 @@ use Scalar::Util 'blessed';
 use Mojo::Log;
 use Scalar::Util qw(blessed reftype);
 use Exporter 'import';
+use JSON::Validator;
+use Try::Tiny;
 
 # avoid boilerplate "$VAR1 = " in dumper output
 $Data::Dumper::Terse = 1;
@@ -98,6 +100,7 @@ our @EXPORT = qw(
   &ensure_timestamp_appended
   set_listen_address
   service_port
+  &validate_data
 );
 
 our @EXPORT_OK = qw(base_host determine_web_ui_web_socket_url get_ws_status_only_url random_string random_hex);
@@ -1214,5 +1217,37 @@ sub any_array_item_contained_by_hash {
 }
 
 sub base_host { Mojo::URL->new($_[0])->host || $_[0] }
+
+sub validate_data {
+    my %args            = @_;
+    my $schema_file     = $args{schema_file};
+    my $data            = $args{data};
+    my $validate_schema = $args{validate_schema};
+    my $validator       = JSON::Validator->new;
+    my $schema;
+    my @errors;
+
+    try {
+        # Note: Using the schema filename; slurp'ed text isn't detected as YAML
+
+        if ($validate_schema) {
+            # Validate the schema: catches errors in type names and definitions
+            $validator = $validator->load_and_validate_schema($schema_file);
+            $schema    = $validator->schema;
+        }
+        else {
+            $schema = $validator->schema($schema_file);
+        }
+    }
+    catch {
+        # The first line of the backtrace gives us the error message we want
+        push @errors, (split /\n/, $_)[0];
+    };
+    if ($schema) {
+        # Note: Don't pass $schema here, that won't work
+        push @errors, $validator->validate($data);
+    }
+    return \@errors;
+}
 
 1;
