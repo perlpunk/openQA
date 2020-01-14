@@ -1,0 +1,46 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1414,
+         "name" : "remote-desktop-client4",
+         "settings" : [
+            {
+               "value" : "c",
+               "key" : "BOOTFROM"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "windows-10-x86_64-1511@64bit_win.qcow2"
+            },
+            {
+               "key" : "NETWORKS",
+               "value" : "fixed"
+            },
+            {
+               "value" : "tap",
+               "key" : "NICTYPE"
+            },
+            {
+               "key" : "PARALLEL_WITH",
+               "value" : "remote-desktop-supportserver4"
+            },
+            {
+               "value" : "remote",
+               "key" : "REGRESSION"
+            },
+            {
+               "value" : "win_client",
+               "key" : "REMOTE_DESKTOP_TYPE"
+            },
+            {
+               "key" : "WORKER_CLASS",
+               "value" : "tap"
+            }
+         ]
+      }
+   ]
+}

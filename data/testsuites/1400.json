@@ -1,0 +1,54 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "key" : "BOOT_HDD_IMAGE",
+               "value" : "1"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-gnome-wayland@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "NETWORKS",
+               "value" : "fixed"
+            },
+            {
+               "value" : "tap",
+               "key" : "NICTYPE"
+            },
+            {
+               "key" : "PARALLEL_WITH",
+               "value" : "desktopapps-remote-desktop-xrdp-server2"
+            },
+            {
+               "key" : "REGRESSION",
+               "value" : "remote"
+            },
+            {
+               "key" : "REMOTE_DESKTOP_TYPE",
+               "value" : "xrdp_client"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_gnome-wayland"
+            },
+            {
+               "value" : "0",
+               "key" : "VIRTIO_CONSOLE"
+            },
+            {
+               "value" : "tap",
+               "key" : "WORKER_CLASS"
+            }
+         ],
+         "id" : 1400,
+         "name" : "desktopapps-remote-desktop-xrdp-client2"
+      }
+   ]
+}

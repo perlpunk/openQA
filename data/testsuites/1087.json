@@ -1,0 +1,30 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1087,
+         "name" : "zdup-Leap-42.1-kde",
+         "settings" : [
+            {
+               "value" : "kde",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-42.1-%ARCH%-Updates-20170213-1-kde@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "MAX_JOB_TIME",
+               "value" : "14400"
+            },
+            {
+               "value" : "heavyload",
+               "key" : "WORKER_CLASS"
+            },
+            {
+               "value" : "1",
+               "key" : "ZDUP"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,27 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "value" : "textmode",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "FILESYSTEM",
+               "value" : "btrfs"
+            },
+            {
+               "value" : "1",
+               "key" : "INSTALLONLY"
+            },
+            {
+               "key" : "VIDEOMODE",
+               "value" : "text"
+            }
+         ],
+         "id" : 1290,
+         "description" : "Mantainer: jeriveramoya Test selection of file system btrfs for / partition in textmode for openSUSE distributions",
+         "name" : "btrfs_textmode"
+      }
+   ]
+}

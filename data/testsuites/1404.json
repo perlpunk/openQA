@@ -1,0 +1,39 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1404,
+         "description" : "Maintainer: dancermak. Test vagrant, vagrant plugins and the vagrant boxes",
+         "name" : "extra_tests_vagrant",
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "value" : "textmode",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "QEMUCPU",
+               "value" : "host"
+            },
+            {
+               "value" : "create_hdd_textmode",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "key" : "UEFI_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2"
+            },
+            {
+               "value" : "schedule/vagrant.yaml",
+               "key" : "YAML_SCHEDULE"
+            }
+         ]
+      }
+   ]
+}

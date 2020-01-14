@@ -1,0 +1,39 @@
+{
+   "TestSuites" : [
+      {
+         "description" : "Maintainer: zluo Test for yast2 UI, ncurses only. Running on created gnome images which provides both text console for ncurses UI tests as well as the gnome environment for the GUI tests. riafarov set TIMEOUT_SCALE to improve stability of the test. fvogt switched to minimalx to improve performance and removed TIMEOUT_SCALE for testing.",
+         "name" : "yast2_ncurses_minimalx",
+         "id" : 1395,
+         "settings" : [
+            {
+               "key" : "BOOT_HDD_IMAGE",
+               "value" : "1"
+            },
+            {
+               "value" : "minimalx",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "prepare,y2uitest_ncurses",
+               "key" : "EXTRATEST"
+            },
+            {
+               "value" : "20",
+               "key" : "HDDSIZEGB"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "value" : "create_hdd_minimalx",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "key" : "UEFI_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2"
+            }
+         ]
+      }
+   ]
+}

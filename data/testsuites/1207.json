@@ -1,0 +1,19 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "btrfs",
+         "id" : 1207,
+         "settings" : [
+            {
+               "value" : "40",
+               "key" : "HDDSIZEGB"
+            },
+            {
+               "key" : "YAML_SCHEDULE",
+               "value" : "schedule/yast/btrfs/btrfs_opensuse.yaml"
+            }
+         ],
+         "description" : "https://progress.opensuse.org/issues/16570\nPARTITIONING_WARNINGS=1\n\nTest installation with btrfs filesystem. Validates no_COW attributes on subvolumes, checks the /home is not on the separate partition."
+      }
+   ]
+}

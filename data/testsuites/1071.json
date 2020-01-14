@@ -1,0 +1,42 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "ENCRYPT",
+               "value" : "1"
+            },
+            {
+               "value" : "40",
+               "key" : "HDDSIZEGB"
+            },
+            {
+               "key" : "INSTALLONLY",
+               "value" : "1"
+            },
+            {
+               "key" : "LVM",
+               "value" : "1"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-cryptlvm@%MACHINE%.qcow2",
+               "key" : "PUBLISH_HDD_1"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-cryptlvm@%MACHINE%-uefi-vars.qcow2",
+               "key" : "PUBLISH_PFLASH_VARS"
+            },
+            {
+               "key" : "QEMU_COMPRESS_QCOW2",
+               "value" : "1"
+            }
+         ],
+         "id" : 1071,
+         "name" : "create_hdd_cryptlvm"
+      }
+   ]
+}

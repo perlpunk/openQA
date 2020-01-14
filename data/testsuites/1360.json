@@ -1,0 +1,43 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "ltp_syscalls_m32",
+         "id" : 1360,
+         "description" : "maintainer: pvorel, rpalethorpe",
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "key" : "DESKTOP",
+               "value" : "textmode"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%FLAVOR%@%MACHINE%-with-ltp-m32.qcow2",
+               "key" : "HDD_1"
+            },
+            {
+               "value" : "_16$|^(move_pages|msg(ctl|get|rcv|snd|stress)|sem(ctl|get|op|snd)|shm(at|ctl|dt|get))",
+               "key" : "LTP_COMMAND_EXCLUDE"
+            },
+            {
+               "key" : "LTP_COMMAND_FILE",
+               "value" : "syscalls"
+            },
+            {
+               "key" : "QEMUCPUS",
+               "value" : "2"
+            },
+            {
+               "value" : "install_ltp+%DISTRI%+%FLAVOR%-m32",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%FLAVOR%@%MACHINE%-with-ltp-m32-uefi-vars.qcow2",
+               "key" : "UEFI_PFLASH_VARS"
+            }
+         ]
+      }
+   ]
+}

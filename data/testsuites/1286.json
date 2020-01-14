@@ -1,0 +1,23 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1286,
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "EXIT_AFTER_START_INSTALL"
+            },
+            {
+               "key" : "NUMDISKS",
+               "value" : "2"
+            },
+            {
+               "value" : "1",
+               "key" : "SELECT_FIRST_DISK"
+            }
+         ],
+         "name" : "select_disk",
+         "description" : "Maintainer: riafarov, mloviska Test the selection of \"first\" disk with the guided setup in partitioning. This is also used as a prerequisite for real hardware tests to select the right disk for installation and not a \"random\" one."
+      }
+   ]
+}

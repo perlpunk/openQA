@@ -1,0 +1,42 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1399,
+         "settings" : [
+            {
+               "value" : "c",
+               "key" : "BOOTFROM"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "windows-10-x86_64-1511@64bit_win.qcow2"
+            },
+            {
+               "key" : "NETWORKS",
+               "value" : "fixed"
+            },
+            {
+               "key" : "NICTYPE",
+               "value" : "tap"
+            },
+            {
+               "value" : "1",
+               "key" : "NLA"
+            },
+            {
+               "value" : "remote",
+               "key" : "REGRESSION"
+            },
+            {
+               "value" : "win_server",
+               "key" : "REMOTE_DESKTOP_TYPE"
+            },
+            {
+               "key" : "WORKER_CLASS",
+               "value" : "tap"
+            }
+         ],
+         "name" : "desktopapps-remote-desktop-xrdp-server1"
+      }
+   ]
+}

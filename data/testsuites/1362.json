@@ -1,0 +1,43 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "crypt_test_krb5_server",
+         "description" : "Maintainer: wnereiz",
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "value" : "%DISTRI%-Tumbleweed-%ARCH%-%BUILD%-textmode@%MACHINE%.qcow2",
+               "key" : "HDD_1"
+            },
+            {
+               "value" : "fixed",
+               "key" : "NETWORKS"
+            },
+            {
+               "value" : "tap",
+               "key" : "NICTYPE"
+            },
+            {
+               "key" : "PARALLEL_WITH",
+               "value" : "crypt_test_krb5_kdc"
+            },
+            {
+               "key" : "SECURITY_TEST",
+               "value" : "crypt_krb5server"
+            },
+            {
+               "value" : "create_hdd_textmode",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "tap",
+               "key" : "WORKER_CLASS"
+            }
+         ],
+         "id" : 1362
+      }
+   ]
+}

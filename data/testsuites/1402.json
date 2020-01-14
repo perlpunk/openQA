@@ -1,0 +1,27 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1402,
+         "settings" : [
+            {
+               "value" : "autoyast_opensuse/autoyast_multi_btrfs.xml",
+               "key" : "AUTOYAST"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "4",
+               "key" : "NUMDISKS"
+            },
+            {
+               "key" : "YAML_SCHEDULE",
+               "value" : "schedule/yast/autoyast_multi_btrfs.yaml"
+            }
+         ],
+         "name" : "autoyast_multi_btrfs",
+         "description" : "AutoYaST installation with multi-device Btrfs. The setup containing 4 hds using two multidevice btrfs, one mounted on / and one mounted on /test. Combines partition-less disk and disk with partition, also includes an encrypted disk."
+      }
+   ]
+}

@@ -1,0 +1,27 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1397,
+         "settings" : [
+            {
+               "value" : "textmode",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-gnome@%MACHINE%.qcow2",
+               "key" : "HDD_1"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_gnome"
+            },
+            {
+               "value" : "schedule/yast/modify_existing_partition_opensuse.yaml",
+               "key" : "YAML_SCHEDULE"
+            }
+         ],
+         "description" : "Suite that modifies/resizes a partition on a previsously formatted disk. Depends on create_hdd_gnome.",
+         "name" : "modify_existing_partition"
+      }
+   ]
+}

@@ -1,0 +1,62 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "value" : "c",
+               "key" : "BOOTFROM"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-gnome-x11@%MACHINE%.qcow2",
+               "key" : "HDD_1"
+            },
+            {
+               "key" : "NETWORKS",
+               "value" : "fixed"
+            },
+            {
+               "key" : "NICTYPE",
+               "value" : "tap"
+            },
+            {
+               "value" : "remote",
+               "key" : "REGRESSION"
+            },
+            {
+               "value" : "xrdp_server",
+               "key" : "REMOTE_DESKTOP_TYPE"
+            },
+            {
+               "value" : "1",
+               "key" : "SHUTDOWN_NEEDS_AUTH"
+            },
+            {
+               "value" : "create_hdd_gnome-x11",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "key" : "SUPPORT_SERVER",
+               "value" : "1"
+            },
+            {
+               "key" : "SUPPORT_SERVER_ROLES",
+               "value" : "dhcp"
+            },
+            {
+               "key" : "VIRTIO_CONSOLE",
+               "value" : "0"
+            },
+            {
+               "value" : "tap",
+               "key" : "WORKER_CLASS"
+            }
+         ],
+         "name" : "remote-desktop-supportserver4",
+         "id" : 1416
+      }
+   ]
+}

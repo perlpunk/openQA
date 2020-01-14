@@ -1,0 +1,204 @@
+defaults:
+  aarch64:
+    machine: aarch64
+    priority: 55
+  s390x:
+    machine: s390x
+    priority: 55
+  x86_64:
+    machine: 64bit
+    priority: 55
+products:
+  kubic-*-DVD-aarch64:
+    distri: kubic
+    flavor: DVD
+    version: '*'
+  kubic-*-DVD-x86_64:
+    distri: kubic
+    flavor: DVD
+    version: '*'
+  opensuse-Tumbleweed-DVD-aarch64:
+    distri: opensuse
+    flavor: DVD
+    version: Tumbleweed
+  opensuse-Tumbleweed-DVD-s390x:
+    distri: opensuse
+    flavor: DVD
+    version: Tumbleweed
+  opensuse-Tumbleweed-DVD-x86_64:
+    distri: opensuse
+    flavor: DVD
+    version: Tumbleweed
+  opensuse-Tumbleweed-JeOS-for-AArch64-aarch64:
+    distri: opensuse
+    flavor: JeOS-for-AArch64
+    version: Tumbleweed
+  opensuse-Tumbleweed-JeOS-for-kvm-and-xen-x86_64:
+    distri: opensuse
+    flavor: JeOS-for-kvm-and-xen
+    version: Tumbleweed
+  opensuse-Tumbleweed-KDE-Live-x86_64:
+    distri: opensuse
+    flavor: KDE-Live
+    version: Tumbleweed
+  opensuse-Tumbleweed-NET-aarch64:
+    distri: opensuse
+    flavor: NET
+    version: Tumbleweed
+  opensuse-Tumbleweed-NET-x86_64:
+    distri: opensuse
+    flavor: NET
+    version: Tumbleweed
+  opensuse-TumbleweedTest-DVD-x86_64:
+    distri: opensuse
+    flavor: DVD
+    version: TumbleweedTest
+  opensuse-TumbleweedTest-multi-machine-x86_64:
+    distri: opensuse
+    flavor: multi-machine
+    version: TumbleweedTest
+  microos-*-MicroOS-Image-ContainerHost-x86_64:
+    distri: microos
+    flavor: MicroOS-Image-ContainerHost
+    version: Tumbleweed
+  microos-*-MicroOS-Image-Kubic-kubeadm-x86_64:
+    distri: microos
+    flavor: MicroOS-Image-Kubic-kubeadm
+    version: Tumbleweed
+scenarios:
+  aarch64:
+    kubic-*-DVD-aarch64:
+    - kubeadm-retest:
+        machine: aarch64-4G-HD40G
+        priority: 53
+    opensuse-Tumbleweed-DVD-aarch64:
+    - install_only:
+        machine: aarch64-uefi_https_boot
+    - iscsi_server:
+        priority: 60
+    - iscsi_client:
+        priority: 60
+    - nvme
+    - remote_ssh_controller
+    - remote_ssh_target
+    - yast2_firstboot
+    - yast2_ui_devel
+    - suse_patches-systemd_testsuite
+    - repo_inst
+    - systemd-testsuite-01-basic
+    - create_hdd_textmode_ext4
+    - desktopapps-firefox-x11:
+        priority: 60
+    - desktopapps-firefox-wayland:
+        priority: 60
+    opensuse-Tumbleweed-JeOS-for-AArch64-aarch64:
+    - jeos_tw_zdup_aarch64
+    opensuse-Tumbleweed-NET-aarch64:
+    - btrfs+warnings:
+        priority: 50
+    - yast2_ncurses_minimalx
+  s390x:
+    opensuse-Tumbleweed-DVD-s390x:
+    - textmode:
+        priority: 50
+  x86_64:
+    kubic-*-DVD-x86_64:
+    - kubeadm-retest:
+        priority: 53
+    opensuse-Tumbleweed-DVD-x86_64:
+    - zdup-Leap-42.1-gnome:
+        machine: 64bit
+    - iscsi_server:
+        priority: 60
+    - iscsi_client:
+        priority: 60
+    - zdup-Leap-42.2-gnome:
+        machine: 64bit
+    - gnome+import_ssh_keys
+    - gnome+do_not_import_ssh_keys
+    - yast2_ui_devel
+    - external_iso
+    - zdup-Leap-42.3-kde:
+        machine: 64bit
+    - zdup-Leap-42.3-gnome:
+        machine: 64bit
+    - suse_patches-systemd_testsuite
+    - zdup-Leap-15.0-gnome:
+        machine: 64bit
+    - desktopapps-other-wayland:
+        machine: 64bit_virtio
+    - desktopapps-documentation-wayland:
+        machine: 64bit_virtio
+        priority: 60
+    - desktopapps-gnome-wayland:
+        machine: 64bit_virtio
+    - repo_inst
+    - systemd-testsuite-01-basic
+    - create_hdd_textmode_ext4:
+        machine: uefi
+    - remote_ssh_controller:
+        machine: 64bit_cirrus
+    - remote_ssh_target:
+        machine: 64bit_cirrus
+    - remote_vnc_controller:
+        machine: 64bit_cirrus
+    - remote_vnc_target:
+        machine: 64bit_cirrus
+    - upgrade_Leap_42.3_cryptlvm-50GB:
+        machine: 64bit
+        priority: 100
+    - upgrade_Leap_42.3_cryptlvm-50GB:
+        machine: uefi
+        priority: 100
+    opensuse-Tumbleweed-JeOS-for-kvm-and-xen-x86_64:
+    - jeos-extra:
+        machine: 64bit_virtio-2G
+    - jeos_tw_zdup_x86_64:
+        machine: 64bit_virtio
+    microos-*-MicroOS-Image-ContainerHost-x86_64:
+    - container-host
+    microos-*-MicroOS-Image-Kubic-kubeadm-x86_64:
+    - kubeadm:
+        settings:
+          PUBLISH_HDD_1: ""
+          PUBLISH_PFLASH_VARS: ""
+    opensuse-Tumbleweed-KDE-Live-x86_64:
+    - kde_live_upgrade_leap_42.3:
+        machine: 64bit-2G
+        priority: 80
+    - kde_live_upgrade_leap_15.0
+    opensuse-Tumbleweed-NET-x86_64:
+    - zdup-13.1-gnome
+    - zdup-13.2
+    - zdup-Leap-42.1-gnome:
+        machine: 64bit
+    - zdup-Leap-42.1-kde
+    - zdup-Leap-42.2-kde
+    - zdup-Leap-42.2-gnome:
+        machine: 64bit
+    - zdup-Leap-42.3-kde:
+        machine: 64bit
+    - zdup-Leap-42.3-gnome:
+        machine: 64bit
+    - zdup-Leap-15.0-gnome:
+        machine: 64bit
+        priority: 85
+    - btrfs+warnings:
+        machine: uefi
+        priority: 100
+    - btrfs+warnings:
+        machine: 64bit
+        priority: 100
+    opensuse-TumbleweedTest-DVD-x86_64:
+    - create_hdd_textmode:
+        machine: 64bit
+    - upgrade_Leap_42.3_kde
+    - regression-installation
+    - desktopapps-gnome
+    opensuse-TumbleweedTest-multi-machine-x86_64:
+    - create_hdd_textmode:
+        machine: 64bit
+    - crypt_test_krb5_kdc
+    - crypt_test_krb5_server
+    - crypt_test_krb5_client
+

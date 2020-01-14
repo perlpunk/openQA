@@ -1,0 +1,35 @@
+{
+   "TestSuites" : [
+      {
+         "description" : "Maintainer: qkzhu@suse.com\n\nSee\nhttps://github.com/os-autoinst/os-autoinst-distri-opensuse/pull/3462",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "value" : "25",
+               "key" : "HDDSIZEGB"
+            },
+            {
+               "key" : "PUBLISH_HDD_1",
+               "value" : "openSUSE-%VERSION%-%BUILD%-%ARCH%_for_regression.qcow2"
+            },
+            {
+               "key" : "PUBLISH_PFLASH_VARS",
+               "value" : "openSUSE-%VERSION%-%BUILD%-%ARCH%_for_regression-uefi-vars.qcow2"
+            },
+            {
+               "key" : "QEMU_COMPRESS_QCOW2",
+               "value" : "1"
+            },
+            {
+               "value" : "installation",
+               "key" : "REGRESSION"
+            }
+         ],
+         "name" : "regression-installation",
+         "id" : 1235
+      }
+   ]
+}

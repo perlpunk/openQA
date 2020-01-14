@@ -1,0 +1,27 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "autoyast_mini",
+         "description" : "Autoyast installation test using minimal profile, hence relying on default values. Configured parameters are set not to ignore any messages and create users as per requirements for openQA tests.",
+         "settings" : [
+            {
+               "key" : "AUTOYAST",
+               "value" : "autoyast/mini.xml"
+            },
+            {
+               "key" : "AUTOYAST_CONFIRM",
+               "value" : "1"
+            },
+            {
+               "key" : "DESKTOP",
+               "value" : "textmode"
+            },
+            {
+               "key" : "INSTALLONLY",
+               "value" : "1"
+            }
+         ],
+         "id" : 1344
+      }
+   ]
+}

@@ -1,0 +1,47 @@
+{
+   "TestSuites" : [
+      {
+         "description" : "The target of the vnc remote installation triggered by the controller",
+         "name" : "remote_vnc_target",
+         "id" : 1420,
+         "settings" : [
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "INSTALLONLY",
+               "value" : "1"
+            },
+            {
+               "value" : "tap",
+               "key" : "NICTYPE"
+            },
+            {
+               "value" : "1",
+               "key" : "OVS_DEBUG"
+            },
+            {
+               "key" : "PARALLEL_WITH",
+               "value" : "remote_vnc_controller"
+            },
+            {
+               "key" : "REMOTE_TARGET",
+               "value" : "vnc"
+            },
+            {
+               "value" : "1",
+               "key" : "USE_SUPPORT_SERVER"
+            },
+            {
+               "value" : "tap",
+               "key" : "WORKER_CLASS"
+            },
+            {
+               "value" : "schedule/yast/remote_vnc_target_opensuse.yaml",
+               "key" : "YAML_SCHEDULE"
+            }
+         ]
+      }
+   ]
+}

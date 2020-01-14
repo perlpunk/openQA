@@ -1,0 +1,43 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "HDDSERIAL_1",
+               "value" : "1"
+            },
+            {
+               "key" : "HDDSIZEGB",
+               "value" : "10"
+            },
+            {
+               "key" : "HDDVERSION",
+               "value" : "openSUSE-13.1-gnome"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "openSUSE-13.1-gnome64.qcow2"
+            },
+            {
+               "value" : "14400",
+               "key" : "MAX_JOB_TIME"
+            },
+            {
+               "key" : "WORKER_CLASS",
+               "value" : "heavyload"
+            },
+            {
+               "value" : "1",
+               "key" : "ZDUP"
+            }
+         ],
+         "id" : 1046,
+         "description" : "Set hdd size to 10 to not going do snapshot test\n\nriafarov has added HDDSERIAL_1=1 poo#38963",
+         "name" : "zdup-13.1-gnome"
+      }
+   ]
+}

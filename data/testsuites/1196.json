@@ -1,0 +1,19 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "textmode-server",
+         "id" : 1196,
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "textmode"
+            },
+            {
+               "value" : "xfs",
+               "key" : "FILESYSTEM"
+            }
+         ],
+         "description" : "textmode (server) test for s390x which still uses graphical YaST"
+      }
+   ]
+}

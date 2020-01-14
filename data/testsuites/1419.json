@@ -1,0 +1,55 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "remote_vnc_controller",
+         "id" : 1419,
+         "description" : "Controller performs remote installation via vnc to the target ",
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "support_server_opensuse-15.0-x86_64-GM-gnome.qcow2"
+            },
+            {
+               "value" : "1",
+               "key" : "INSTALLONLY"
+            },
+            {
+               "value" : "tap",
+               "key" : "NICTYPE"
+            },
+            {
+               "value" : "1",
+               "key" : "OVS_DEBUG"
+            },
+            {
+               "value" : "vnc",
+               "key" : "REMOTE_CONTROLLER"
+            },
+            {
+               "value" : "1",
+               "key" : "SUPPORT_SERVER"
+            },
+            {
+               "key" : "SUPPORT_SERVER_ROLES",
+               "value" : "dhcp,dns"
+            },
+            {
+               "value" : "tap",
+               "key" : "WORKER_CLASS"
+            },
+            {
+               "value" : "schedule/yast/remote_vnc_controller_opensuse.yaml",
+               "key" : "YAML_SCHEDULE"
+            }
+         ]
+      }
+   ]
+}

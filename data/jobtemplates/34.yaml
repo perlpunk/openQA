@@ -1,0 +1,16 @@
+defaults:
+  s390x:
+    machine: s390x
+    priority: 50
+products:
+  opensuse-Tumbleweed-DVD-s390x:
+    distri: opensuse
+    flavor: DVD
+    version: Tumbleweed
+scenarios:
+  s390x:
+    opensuse-Tumbleweed-DVD-s390x:
+    - textmode-server:
+        settings:
+          EXTRABOOTPARAMS: hvc_iucv=8
+

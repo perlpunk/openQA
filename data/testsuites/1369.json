@@ -1,0 +1,26 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "RAID5_gpt",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "kde"
+            },
+            {
+               "value" : "RAID0_gpt",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "key" : "WORKER_CLASS",
+               "value" : "heavyload"
+            },
+            {
+               "value" : "schedule/yast/raid/raid5_opensuse_gpt.yaml",
+               "key" : "YAML_SCHEDULE"
+            }
+         ],
+         "id" : 1369
+      }
+   ]
+}

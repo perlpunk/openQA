@@ -1,0 +1,47 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "selinux",
+         "description" : "Maintainer (Lily Zhao) llzhao@suse.com",
+         "settings" : [
+            {
+               "key" : "ARCH",
+               "value" : "x86_64"
+            },
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "key" : "DESKTOP",
+               "value" : "textmode"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "MACHINE",
+               "value" : "64bit"
+            },
+            {
+               "key" : "SECURITY_TEST",
+               "value" : "selinux"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_textmode"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2",
+               "key" : "UEFI_PFLASH_VARS"
+            },
+            {
+               "value" : "text",
+               "key" : "VIDEOMODE"
+            }
+         ],
+         "id" : 1316
+      }
+   ]
+}

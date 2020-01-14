@@ -1,0 +1,34 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "gnome_dual_windows10",
+         "settings" : [
+            {
+               "value" : "ide-cd",
+               "key" : "CDMODEL"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "1",
+               "key" : "DUALBOOT"
+            },
+            {
+               "key" : "HDDVERSION",
+               "value" : "Windows 10"
+            },
+            {
+               "value" : "windows-10-x86_64-1903@%MACHINE%.qcow2",
+               "key" : "HDD_1"
+            },
+            {
+               "value" : "100",
+               "key" : "VNC_STALL_THRESHOLD"
+            }
+         ],
+         "id" : 1272
+      }
+   ]
+}

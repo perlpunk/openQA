@@ -1,0 +1,27 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1292,
+         "description" : "Mantainer: jeriveramoya Test selection of file system xfs for / partition in textmode for openSUSE distributions",
+         "name" : "xfs_textmode",
+         "settings" : [
+            {
+               "value" : "textmode",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "xfs",
+               "key" : "FILESYSTEM"
+            },
+            {
+               "key" : "INSTALLONLY",
+               "value" : "1"
+            },
+            {
+               "key" : "VIDEOMODE",
+               "value" : "text"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,26 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "value" : "kde",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "RAID1_gpt",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "heavyload",
+               "key" : "WORKER_CLASS"
+            },
+            {
+               "key" : "YAML_SCHEDULE",
+               "value" : "schedule/yast/raid/raid10_opensuse_gpt.yaml"
+            }
+         ],
+         "name" : "RAID10_gpt",
+         "id" : 1370
+      }
+   ]
+}

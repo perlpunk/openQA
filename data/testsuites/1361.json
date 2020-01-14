@@ -1,0 +1,39 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "crypt_test_krb5_kdc",
+         "description" : "Maintainer: wnereiz",
+         "id" : 1361,
+         "settings" : [
+            {
+               "value" : "1                                                                                                                                                                                                                                                                                                                                                               ",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "value" : "%DISTRI%-Tumbleweed-%ARCH%-%BUILD%-textmode@%MACHINE%.qcow2                                                                                                                   ",
+               "key" : "HDD_1"
+            },
+            {
+               "key" : "NETWORKS",
+               "value" : "fixed                                                                                                                                                                                "
+            },
+            {
+               "value" : "tap                                                                                                                                                                                   ",
+               "key" : "NICTYPE"
+            },
+            {
+               "key" : "SECURITY_TEST",
+               "value" : "crypt_krb5kdc                                                                                                                                                                   "
+            },
+            {
+               "value" : "create_hdd_textmode                                                                                                                                                          ",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "key" : "WORKER_CLASS",
+               "value" : "tap"
+            }
+         ]
+      }
+   ]
+}

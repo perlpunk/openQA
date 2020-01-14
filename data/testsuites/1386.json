@@ -1,0 +1,35 @@
+{
+   "TestSuites" : [
+      {
+         "settings" : [
+            {
+               "key" : "+HDD_1",
+               "value" : "openSUSE-Tumbleweed-JeOS.x86_64-old-%BUILD%.qcow2"
+            },
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "value" : "textmode",
+               "key" : "DESKTOP"
+            },
+            {
+               "value" : "console=tty0 quiet",
+               "key" : "EXTRABOOTPARAMS"
+            },
+            {
+               "key" : "HDD_1_URL",
+               "value" : "http://download.opensuse.org/tumbleweed/appliances/openSUSE-Tumbleweed-JeOS.x86_64-kvm-and-xen.qcow2?foobar=%BUILD%"
+            },
+            {
+               "key" : "ZDUP",
+               "value" : "1"
+            }
+         ],
+         "name" : "jeos_tw_zdup_x86_64",
+         "description" : "https://progress.opensuse.org/issues/56936\t\n\nWhile it downloads the last published (=previous) snapshot, %BUILD% is included in HDD_1(_URL) to avoid caching the unversioned filename.",
+         "id" : 1386
+      }
+   ]
+}

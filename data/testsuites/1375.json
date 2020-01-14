@@ -1,0 +1,30 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1375,
+         "name" : "desktopapps-firefox-x11",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%-x11@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "REGRESSION",
+               "value" : "firefox"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_gnome-x11"
+            },
+            {
+               "key" : "UEFI_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%-x11@%MACHINE%-uefi-vars.qcow2"
+            }
+         ]
+      }
+   ]
+}

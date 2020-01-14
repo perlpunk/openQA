@@ -1,0 +1,38 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1047,
+         "name" : "zdup-13.2",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "kde"
+            },
+            {
+               "key" : "EXCLUDE_MODULES",
+               "value" : "hexchat"
+            },
+            {
+               "key" : "HDDVERSION",
+               "value" : "openSUSE-13.2"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "openSUSE-13.2-x86_64.qcow2"
+            },
+            {
+               "value" : "14400",
+               "key" : "MAX_JOB_TIME"
+            },
+            {
+               "value" : "heavyload",
+               "key" : "WORKER_CLASS"
+            },
+            {
+               "value" : "1",
+               "key" : "ZDUP"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,35 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1309,
+         "description" : "Maintainer: Yuan Ren (yuanren10). See https://progress.opensuse.org/issues/23906",
+         "name" : "desktopapps-other",
+         "settings" : [
+            {
+               "key" : "BOOT_HDD_IMAGE",
+               "value" : "1"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "value" : "other",
+               "key" : "REGRESSION"
+            },
+            {
+               "value" : "create_hdd_gnome",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2",
+               "key" : "UEFI_PFLASH_VARS"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,31 @@
+{
+   "TestSuites" : [
+      {
+         "description" : "Maintainer Yaun Ren",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "value" : "documentation",
+               "key" : "REGRESSION"
+            },
+            {
+               "value" : "create_hdd_gnome",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2",
+               "key" : "UEFI_PFLASH_VARS"
+            }
+         ],
+         "id" : 1311,
+         "name" : "desktopapps-documentation"
+      }
+   ]
+}

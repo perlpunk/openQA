@@ -1,0 +1,47 @@
+{
+   "TestSuites" : [
+      {
+         "name" : "openqa_bootstrap_container",
+         "description" : "Maintainer: dheidler. Install openQA in nspawn container using openqa-bootstrap-container script.",
+         "settings" : [
+            {
+               "key" : "+QEMUCPU",
+               "value" : "host"
+            },
+            {
+               "value" : "1",
+               "key" : "BOOTSTRAP_CONTAINER"
+            },
+            {
+               "key" : "BOOT_HDD_IMAGE",
+               "value" : "1"
+            },
+            {
+               "value" : "gnome",
+               "key" : "DESKTOP"
+            },
+            {
+               "key" : "EXTRATEST",
+               "value" : "openqa_bootstrap"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "OPENQA_HOST",
+               "value" : "http://openqa.opensuse.org"
+            },
+            {
+               "value" : "create_hdd_gnome",
+               "key" : "START_AFTER_TEST"
+            },
+            {
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2",
+               "key" : "UEFI_PFLASH_VARS"
+            }
+         ],
+         "id" : 1340
+      }
+   ]
+}

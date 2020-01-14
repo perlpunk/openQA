@@ -1,0 +1,30 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1376,
+         "name" : "desktopapps-firefox-wayland",
+         "settings" : [
+            {
+               "key" : "DESKTOP",
+               "value" : "gnome"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%-wayland@%MACHINE%.qcow2"
+            },
+            {
+               "key" : "REGRESSION",
+               "value" : "firefox"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_gnome-wayland"
+            },
+            {
+               "key" : "UEFI_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%-wayland@%MACHINE%-uefi-vars.qcow2"
+            }
+         ]
+      }
+   ]
+}

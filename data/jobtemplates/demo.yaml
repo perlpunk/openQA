@@ -1,0 +1,18 @@
+products:
+  opensuse-Tumbleweed-DVD-s390x:
+    distri: opensuse
+    flavor: DVD
+    version: Tumbleweed
+scenarios:
+  s390x:
+    opensuse-Tumbleweed-DVD-s390x:
+    - textmode-server:   # insert description and new settings
+         settings:
+           EXTRABOOTPARAMS: hvc_iucv=8
+    - textmode-server:   # insert settings
+       description: foo
+    - textmode-server:   # insert description and settings
+        priority: 99
+    - textmode-server    # append testsuite
+    - foo
+

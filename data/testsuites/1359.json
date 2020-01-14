@@ -1,0 +1,59 @@
+{
+   "TestSuites" : [
+      {
+         "id" : 1359,
+         "description" : "maintainer: pvorel, rpalethorpe",
+         "name" : "install_ltp+opensuse+DVD-m32",
+         "settings" : [
+            {
+               "value" : "1",
+               "key" : "BOOT_HDD_IMAGE"
+            },
+            {
+               "key" : "DESKTOP",
+               "value" : "textmode"
+            },
+            {
+               "key" : "GRUB_PARAM",
+               "value" : "debug_pagealloc=on;ima_policy=tcb"
+            },
+            {
+               "key" : "HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%.qcow2"
+            },
+            {
+               "value" : "from_repo",
+               "key" : "INSTALL_LTP"
+            },
+            {
+               "key" : "LTP_EXTRA_CONF_FLAGS",
+               "value" : "CFLAGS=-m32 LDFLAGS=-m32"
+            },
+            {
+               "key" : "PUBLISH_HDD_1",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%FLAVOR%@%MACHINE%-with-ltp-m32.qcow2"
+            },
+            {
+               "key" : "PUBLISH_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%FLAVOR%@%MACHINE%-with-ltp-m32-uefi-vars.qcow2"
+            },
+            {
+               "key" : "QEMUCPUS",
+               "value" : "4"
+            },
+            {
+               "value" : "4096",
+               "key" : "QEMURAM"
+            },
+            {
+               "key" : "START_AFTER_TEST",
+               "value" : "create_hdd_textmode"
+            },
+            {
+               "key" : "UEFI_PFLASH_VARS",
+               "value" : "%DISTRI%-%VERSION%-%ARCH%-%BUILD%-%DESKTOP%@%MACHINE%-uefi-vars.qcow2"
+            }
+         ]
+      }
+   ]
+}
