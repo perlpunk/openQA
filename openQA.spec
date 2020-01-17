@@ -258,6 +258,7 @@ ln -s %{_datadir}/openqa/script/openqa-clone-job %{buildroot}%{_bindir}/openqa-c
 ln -s %{_datadir}/openqa/script/dump_templates %{buildroot}%{_bindir}/openqa-dump-templates
 ln -s %{_datadir}/openqa/script/load_templates %{buildroot}%{_bindir}/openqa-load-templates
 ln -s %{_datadir}/openqa/script/openqa-clone-custom-git-refspec %{buildroot}%{_bindir}/openqa-clone-custom-git-refspec
+ln -s %{_datadir}/openqa/script/openqa-validate-yaml %{buildroot}%{_bindir}/openqa-validate-yaml
 %if %{with python_scripts}
 ln -s %{_datadir}/openqa/script/openqa-label-all %{buildroot}%{_bindir}/openqa-label-all
 %endif
@@ -494,6 +495,7 @@ fi
 %{_datadir}/openqa/script/load_templates
 %{_datadir}/openqa/script/openqa-clone-job
 %{_datadir}/openqa/script/openqa-clone-custom-git-refspec
+%{_datadir}/openqa/script/openqa-validate-yaml
 %{_datadir}/openqa/script/configure-web-proxy
 %dir %{_datadir}/openqa/lib
 %{_datadir}/openqa/lib/OpenQA/Client.pm
@@ -504,6 +506,7 @@ fi
 %{_bindir}/openqa-dump-templates
 %{_bindir}/openqa-load-templates
 %{_bindir}/openqa-clone-custom-git-refspec
+%{_bindir}/openqa-validate-yaml
 
 %if %{with python_scripts}
 %files python-scripts
