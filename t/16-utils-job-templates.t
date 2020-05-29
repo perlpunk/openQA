@@ -78,4 +78,6 @@ is scalar @$errors, 1, "Invalid toplevel key detected"
   };
 like($errors->[0], qr{/: Properties not allowed: invalid.}, 'Invalid toplevel key error message');
 
+warn "This is an intentional warning!";
+
 done_testing;
