@@ -86,6 +86,7 @@ aliases:
   - &make_test
     name: "Running unit tests"
     command: |
+      sudo zypper install chromedriver-81.0.4044.138-lp151.2.88.1
       export PERL5OPT="$COVEROPT,-db,cover_db_${CIRCLE_JOB}"
       echo PERL5OPT="$PERL5OPT"
       make test-$CIRCLE_JOB
@@ -109,8 +110,7 @@ images:
       COMMIT_AUTHOR_EMAIL: skynet@open.qa
 
   - &base
-    #image: registry.opensuse.org/devel/openqa/ci/containers/base:latest
-    image: registry.opensuse.org/devel/openqa/ci/containers/base:44a49f2149fe
+    image: registry.opensuse.org/devel/openqa/ci/containers/base:latest
     <<: *docker_config
 
   - &dependency_bot
