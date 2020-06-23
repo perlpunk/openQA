@@ -86,7 +86,7 @@ aliases:
   - &make_test
     name: "Running unit tests"
     command: |
-      sudo zypper in --oldpackage chromedriver-81.0.4044.138-lp151.2.88.1 chromium-81.0.4044.138
+      sudo zypper -n in --oldpackage chromedriver-81.0.4044.138-lp151.2.88.1 chromium-81.0.4044.138
       export PERL5OPT="$COVEROPT,-db,cover_db_${CIRCLE_JOB}"
       echo PERL5OPT="$PERL5OPT"
       make test-$CIRCLE_JOB
