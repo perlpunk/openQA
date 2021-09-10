@@ -96,15 +96,30 @@ sub list {
         }
         if ($have) {
             for my $par (@$key) {
-                $search{$par} = $self->param($par);
+                $search{"me.$par"} = $self->param($par);
             }
         }
     }
 
     my @result;
+    my $sql_field = {
+        Machines   => 'machine',
+        TestSuites => 'test_suite',
+        Products   => 'product',
+    }->{$table};
     eval {
         my $rs = $self->schema->resultset($table);
-        @result = %search ? $rs->search(\%search) : $rs->all;
+        @result = $rs->search(
+            \%search,
+            {
+                # 'prefetch' would select too much unneeded columns
+                # https://metacpan.org/pod/DBIx::Class::ResultSet#collapse
+                join      => 'settings',
+                collapse  => 1,
+                '+select' => [
+                    qw(me.id me.name me.description settings.id settings.key settings.value),
+                    "settings.${sql_field}_id"
+                ]});
     };
     my $error = $@;
     if ($error) {
