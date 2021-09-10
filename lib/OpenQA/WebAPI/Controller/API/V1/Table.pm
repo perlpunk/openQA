@@ -117,7 +117,7 @@ sub list {
                 join      => 'settings',
                 collapse  => 1,
                 '+select' => [
-                    qw(me.id me.name me.description settings.id settings.key settings.value),
+                    qw(settings.id settings.key settings.value),
                     "settings.${sql_field}_id"
                 ]});
     };

@@ -75,6 +75,9 @@ my ($rh, $reference) = tempfile(UNLINK => 1, SUFFIX => '.json');
 $args = "$base_args --json > $reference";
 $expected = qr/^$/;
 dump_templates $args, $expected, 're-dumped fixtures';
+warn __PACKAGE__.':'.__LINE__.": !!!! $tempfilename\n";
+system "cp $tempfilename /tmp/testdump.json";
+system "cp $reference /tmp/reference.json";
 is_deeply decode($tempfilename), decode($reference), 'both dumps match';
 
 subtest 'dump_templates tests' => sub {
