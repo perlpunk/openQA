@@ -1,0 +1,49 @@
+---
+name: Perl tests
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+    inputs:
+      stability_test:
+        description: 'Set to 1 to fail if any of the RETRY fails'
+        default: 0
+      target:
+        description: 'Makefile target'
+        default: fullstack
+
+jobs:
+  fullstack:
+    runs-on: ubuntu-latest
+    container:
+      image: registry.opensuse.org/devel/openqa/ci/containers/base:latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: bash -x tools/ci/build_cache.sh
+      - name: Fix permissions of working folder
+        run: sudo chown -R squamata ..
+      - name: Build os-autoinst
+        run: bash -x tools/ci/build_autoinst.sh
+      - name: Create test-results folder
+        run: |
+          sudo mkdir -p test-results/junit
+          sudo chown -R $USER test-results
+      - name: Fullstack
+        run: make test-${{ github.event.inputs.target }}
+        env:
+          JUNIT_PACKAGE: openQA
+          JUNIT_NAME_MANGLE: perl
+          PERL_TEST_HARNESS_DUMP_TAP: test-results
+          HARNESS: --harness TAP::Harness::JUnit --timer
+          JUNIT_OUTPUT_FILE: test-results/junit/${{ github.event.inputs.target }}.xml
+          STABILITY_TEST: ${{ github.event.inputs.stability_test }}
+      - name: Merge coverage databases
+        run: cover -write cover_db cover_db*
+      - name: Generate coverage report
+        run: make coverage-report-html
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Upload artifacts
+          path: |
+            test-results
+            cover_db
