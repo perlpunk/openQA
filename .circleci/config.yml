@@ -25,15 +25,6 @@ aliases:
     command: |
       [ -z "$CIRCLE_WORKFLOW_ID" ] || sudo chown -R squamata /var/cache/zypp/packages
 
-  - &chown_hack_for_cache_fullstack
-    name: Chown autoinst cache to user
-    command: |
-      # hack as we don't want run container as root
-      [ -z "$CIRCLE_WORKFLOW_ID" ] || {
-        sudo mkdir -p /var/cache/autoinst
-        sudo chown -R squamata /var/cache/autoinst
-      }
-
   - &check_cache
     name: Log cached packages
     command: |
@@ -73,8 +64,7 @@ aliases:
         sudo cp -r /var/cache/autoinst ../os-autoinst
         sudo chown -R 1000 ../os-autoinst/t/data
       else # only in local run
-         [ -d ../os-autoinst ] || { sudo mkdir ../os-autoinst && sudo chown -R 1000 ../os-autoinst; }
-         bash tools/ci/build_autoinst.sh ../os-autoinst
+         bash tools/ci/build_autoinst.sh
        fi
 
   - &make_test
@@ -159,7 +149,6 @@ jobs:
     steps:
       - checkout
       - run: *chown_hack_for_cache
-      - run: *chown_hack_for_cache_fullstack
       - restore_cache: *restore_cache
       - restore_cache: *restore_fullstack_cache
       - run: *check_cache
@@ -197,7 +186,6 @@ jobs:
     steps:
       - checkout
       - run: *chown_hack_for_cache
-      - run: *chown_hack_for_cache_fullstack
       - restore_cache: *restore_cache
       - restore_cache: *restore_fullstack_cache
       - run: *check_cache
