@@ -2,6 +2,7 @@
 name: Perl tests
 # yamllint disable-line rule:truthy
 on:
+  push:
   workflow_dispatch:
     inputs:
       stability_test:
