@@ -26,6 +26,8 @@ jobs:
         run: |
           sudo mkdir -p test-results/junit
           sudo chown -R $USER test-results
+      - name: Make project folder user-writable
+        run: sudo chown -R $USER $PWD
       - name: Fullstack
         run: make test-${{ github.event.inputs.target }}
         env:
