@@ -23,11 +23,11 @@ jobs:
         run: bash -x tools/ci/build_cache.sh
       - name: Build os-autoinst
         run: bash -x tools/ci/build_autoinst.sh
-      - |
-        pwd
-        id
-        ls -la
-        echo $USER
+      - run: |
+          pwd
+          id
+          ls -la
+          echo $USER
       - name: Create test-results folder
         run: |
           sudo mkdir -p test-results/junit
@@ -43,8 +43,8 @@ jobs:
           HARNESS: --harness TAP::Harness::JUnit --timer
           JUNIT_OUTPUT_FILE: test-results/junit/${{ github.event.inputs.target }}.xml
           STABILITY_TEST: ${{ github.event.inputs.stability_test }}
-      - |
-        ls -lrt
+      - run: |
+          ls -lrt
       - name: Merge coverage databases
         run: cover -write cover_db cover_db*
       - name: Generate coverage report
