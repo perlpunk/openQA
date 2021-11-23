@@ -35,7 +35,7 @@ jobs:
       - name: Make project folder user-writable
         run: sudo chown -R $USER $PWD
       - name: Fullstack
-        run: make test-${{ github.event.inputs.target }}
+        run: make test-fullstack
         env:
           JUNIT_PACKAGE: openQA
           JUNIT_NAME_MANGLE: perl
