@@ -156,23 +156,23 @@ jobs:
             fi
       - save_cache: *save_fullstack_cache
 
-#  checkstyle: &test-template
-#    docker:
-#      - <<: *base
-#    steps:
-#      - checkout
-#      - run: *chown_hack_for_cache
-#      - restore_cache: *restore_cache
-#      - run: *check_cache
-#      - store_artifacts: *store_logs
-#      - run: *install_cached_packages
-#      - run: *make_test
-#      - persist_to_workspace:
-#          root: .
-#          paths:
-#            - cover_db_*
-#      - store_test_results: *store_test_results
-#      - store_artifacts: *store_artifacts
+  checkstyle: &test-template
+    docker:
+      - <<: *base
+    steps:
+      - checkout
+      - run: *chown_hack_for_cache
+      - restore_cache: *restore_cache
+      - run: *check_cache
+      - store_artifacts: *store_logs
+      - run: *install_cached_packages
+      - run: *make_test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - cover_db_*
+      - store_test_results: *store_test_results
+      - store_artifacts: *store_artifacts
 
   fullstack: &test-fullstack-template
     docker:
@@ -262,18 +262,18 @@ workflows:
       - checkstyle: &requires
           requires:
             - cache
-      - t:
-          <<: *requires
-      - heavy:
-          <<: *requires
-      - api:
-          <<: *requires
-      - ui:
-          <<: *requires
-      # put unstable tests in tools/unstable_tests.txt and uncomment if necessary to handle with retries
-      - unstable:
-          requires:
-            - cache
+#      - t:
+#          <<: *requires
+#      - heavy:
+#          <<: *requires
+#      - api:
+#          <<: *requires
+#      - ui:
+#          <<: *requires
+#      # put unstable tests in tools/unstable_tests.txt and uncomment if necessary to handle with retries
+#      - unstable:
+#          requires:
+#            - cache
       - cache.fullstack:
           <<: *requires
       - fullstack: &requires_fullstack
@@ -290,8 +290,8 @@ workflows:
             - unstable
             - fullstack
             - fullstack-unstable
-      - build-docs:
-          <<: *requires
+#      - build-docs:
+#          <<: *requires
 
   nightly:
     triggers:
