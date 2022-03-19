@@ -237,20 +237,20 @@ jobs:
       - run: make coverage-report-codecov
       - run: curl -O https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov && ./codecov
 
-#  build-docs: &docs-template
-#    name: "Generating docs"
-#    docker:
-#      - <<: *base
-#    steps:
-#      - checkout
-#      - run: *chown_hack_for_cache
-#      - restore_cache: *restore_cache
-#      - run: *check_cache
-#      - store_artifacts: *store_logs
-#      - run: *install_cached_packages
-#      - run: *git_token_authentication
-#      - run: tools/ci/build-docs
-#
+  build-docs: &docs-template
+    name: "Generating docs"
+    docker:
+      - <<: *base
+    steps:
+      - checkout
+      - run: *chown_hack_for_cache
+      - restore_cache: *restore_cache
+      - run: *check_cache
+      - store_artifacts: *store_logs
+      - run: *install_cached_packages
+      - run: *git_token_authentication
+      - run: tools/ci/build-docs
+
   build-docs-nightly:
     <<: *docs-template
 
