@@ -283,12 +283,12 @@ workflows:
           <<: *requires_fullstack
       - codecov:
           requires:
-            - t
-            - heavy
-            - api
-            - ui
-            - unstable
-            - fullstack
+#            - t
+#            - heavy
+#            - api
+#            - ui
+#            - unstable
+#            - fullstack
             - fullstack-unstable
 #      - build-docs:
 #          <<: *requires
