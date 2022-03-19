@@ -156,23 +156,23 @@ jobs:
             fi
       - save_cache: *save_fullstack_cache
 
-  checkstyle: &test-template
-    docker:
-      - <<: *base
-    steps:
-      - checkout
-      - run: *chown_hack_for_cache
-      - restore_cache: *restore_cache
-      - run: *check_cache
-      - store_artifacts: *store_logs
-      - run: *install_cached_packages
-      - run: *make_test
-      - persist_to_workspace:
-          root: .
-          paths:
-            - cover_db_*
-      - store_test_results: *store_test_results
-      - store_artifacts: *store_artifacts
+#  checkstyle: &test-template
+#    docker:
+#      - <<: *base
+#    steps:
+#      - checkout
+#      - run: *chown_hack_for_cache
+#      - restore_cache: *restore_cache
+#      - run: *check_cache
+#      - store_artifacts: *store_logs
+#      - run: *install_cached_packages
+#      - run: *make_test
+#      - persist_to_workspace:
+#          root: .
+#          paths:
+#            - cover_db_*
+#      - store_test_results: *store_test_results
+#      - store_artifacts: *store_artifacts
 
   fullstack: &test-fullstack-template
     docker:
@@ -197,20 +197,20 @@ jobs:
       - store_artifacts:
           path: test-results/fullstack
           destination: artifacts
-  t:
-    <<: *test-template
-
-  heavy:
-    <<: *test-template
-
-  ui:
-    <<: *test-template
-
-  api:
-    <<: *test-template
-
-  unstable:
-    <<: *test-template
+#  t:
+#    <<: *test-template
+#
+#  heavy:
+#    <<: *test-template
+#
+#  ui:
+#    <<: *test-template
+#
+#  api:
+#    <<: *test-template
+#
+#  unstable:
+#    <<: *test-template
 
   fullstack-unstable:
     <<: *test-fullstack-template
@@ -237,22 +237,22 @@ jobs:
       - run: make coverage-report-codecov
       - run: curl -O https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov && ./codecov
 
-  build-docs: &docs-template
-    name: "Generating docs"
-    docker:
-      - <<: *base
-    steps:
-      - checkout
-      - run: *chown_hack_for_cache
-      - restore_cache: *restore_cache
-      - run: *check_cache
-      - store_artifacts: *store_logs
-      - run: *install_cached_packages
-      - run: *git_token_authentication
-      - run: tools/ci/build-docs
-
-  build-docs-nightly:
-    <<: *docs-template
+#  build-docs: &docs-template
+#    name: "Generating docs"
+#    docker:
+#      - <<: *base
+#    steps:
+#      - checkout
+#      - run: *chown_hack_for_cache
+#      - restore_cache: *restore_cache
+#      - run: *check_cache
+#      - store_artifacts: *store_logs
+#      - run: *install_cached_packages
+#      - run: *git_token_authentication
+#      - run: tools/ci/build-docs
+#
+#  build-docs-nightly:
+#    <<: *docs-template
 
 workflows:
   version: 2
