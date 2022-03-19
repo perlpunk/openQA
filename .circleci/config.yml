@@ -251,8 +251,8 @@ jobs:
 #      - run: *git_token_authentication
 #      - run: tools/ci/build-docs
 #
-#  build-docs-nightly:
-#    <<: *docs-template
+  build-docs-nightly:
+    <<: *docs-template
 
 workflows:
   version: 2
