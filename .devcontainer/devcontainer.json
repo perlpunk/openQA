@@ -1,8 +1,6 @@
 {
     "name": "openQA Single Instance",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "image": "registry.opensuse.org/devel/openqa/containers/openqa-single-instance",
     "runArgs": [ "--privileged", "--device", "/dev/kvm" ],
     //"postCreateCommand": "chown root:kvm /dev/kvm"
     "postStartCommand": "chown root:kvm /dev/kvm"
