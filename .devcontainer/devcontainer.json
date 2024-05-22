@@ -1,6 +1,6 @@
 {
     "name": "openQA Single Instance",
-    "image": "registry.opensuse.org/home/tinita/branches/devel/openqa/containers/openqa-single-instance:latest",
+    "image": "registry.opensuse.org/home/tinita/single-instance-openqa/containers/opensuse/openqa-single-instance:latest",
     "runArgs": [ "--privileged", "--device", "/dev/kvm" ],
     //"postCreateCommand": "chown root:kvm /dev/kvm"
     "postStartCommand": "chown root:kvm /dev/kvm"
