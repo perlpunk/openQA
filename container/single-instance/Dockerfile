@@ -2,7 +2,7 @@
 #!BuildTag: openqa-single-instance:latest opensuse/openqa-single-instance:latest opensuse/openqa-single-instance:%PKG_VERSION% opensuse/openqa-single-instance:%PKG_VERSION%.%RELEASE%
 
 # hadolint ignore=DL3006
-FROM opensuse/tumbleweed
+FROM opensuse/leap:15.6
 
 # labelprefix=org.opensuse.openqa-single-instance
 LABEL org.opencontainers.image.title="openQA single-instance container"
