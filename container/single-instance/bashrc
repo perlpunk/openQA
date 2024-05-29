@@ -1,0 +1,9 @@
+echo "Welcome to the openqa-single-instance container!
+Look at /var/log/openqa-bootstrap.log.
+If it is not running, run
+
+    /usr/share/openqa/script/openqa-bootstrap
+
+If it was stopped, you can start it again with
+    /usr/share/openqa/script/openqa-bootstrap start
+"

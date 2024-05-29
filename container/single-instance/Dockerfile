@@ -27,3 +27,5 @@ ENV OPENQA_SERVICE_PORT_DELTA=0
 
 ENTRYPOINT ["/usr/share/openqa/script/openqa-bootstrap"]
 HEALTHCHECK CMD curl -f http://localhost || exit 1
+
+COPY container/single-instance/bashrc /root/.bashrc
