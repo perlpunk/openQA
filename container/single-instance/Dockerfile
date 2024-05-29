@@ -28,4 +28,13 @@ ENV OPENQA_SERVICE_PORT_DELTA=0
 ENTRYPOINT ["/usr/share/openqa/script/openqa-bootstrap"]
 HEALTHCHECK CMD curl -f http://localhost || exit 1
 
-COPY container/single-instance/bashrc /root/.bashrc
+RUN echo $'echo "Welcome to the openqa-single-instance container!"  \n\
+echo "Look at /var/log/openqa-bootstrap.log." \n\
+echo "If it is not running, run" \n\
+echo "" \n\
+echo "    /usr/share/openqa/script/openqa-bootstrap" \n\
+echo "" \n\
+echo "If it was stopped, you can start it again with" \n\
+echo "    /usr/share/openqa/script/openqa-bootstrap start" \n\
+' > /root/.bashrc
+
