@@ -348,10 +348,10 @@ workflows:
       # https://progress.opensuse.org/issues/123867
       - cache
       - cache-npm
-      - cache-fullstack:
-          <<: *requires
-      - dependencies-pr:
-          context: GitHub
-      - build-docs-nightly:
-          context: GitHub
-          <<: *requires_fullstack
+#      - cache-fullstack:
+#          <<: *requires
+#      - dependencies-pr:
+#          context: GitHub
+#      - build-docs-nightly:
+#          context: GitHub
+#          <<: *requires_fullstack
