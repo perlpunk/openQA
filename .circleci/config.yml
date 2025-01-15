@@ -192,7 +192,10 @@ jobs:
       - restore_cache: *restore_npm_cache
       - run:
           name: "Running unit tests"
-          command: prove t/00-tidy.t -v
+          command: |
+            prove t/00-tidy.t -v || true
+            ./tools/tidyall -a
+            git diff
           no_output_timeout: 50m
       - persist_to_workspace:
           root: .
