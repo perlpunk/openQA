@@ -18,7 +18,7 @@ use OpenQA::Test::TimeLimit '20';
 use OpenQA::Test::Case;
 use Mojo::File 'path';
 use List::Util 'min';
-use Try::Tiny;
+use Feature::Compat::Try;
 
 plan skip_all => 'set TEST_PG to e.g. "DBI:Pg:dbname=test" to enable this test' unless $ENV{TEST_PG};
 
@@ -48,7 +48,8 @@ my $dh = DBIx::Class::DeploymentHandler->new(
 my $deployed_version;
 try {
     $deployed_version = $dh->version_storage->database_version;
-};
+}
+catch ($e) { }
 ok(!$deployed_version, 'DB not deployed by plain schema connection with deploy => 0');
 
 my $ret = $schema->deploy;
