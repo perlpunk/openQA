@@ -251,7 +251,7 @@ COVERDB_SUFFIX ?=
 # We use JSON::PP because there is a bug producing a (harmless) 'redefined'
 # warning when using Devel::Cover and Cpanel::JSON::XS
 # https://progress.opensuse.org/issues/90371
-COVEROPT ?= -mJSON::PP -MDevel::Cover=-select_re,'^/lib',+ignore_re,lib/perlcritic/Perl/Critic/Policy,-coverage,statement,-db,cover_db$(COVERDB_SUFFIX),
+COVEROPT ?= -mJSON::PP -MSyntax::Keyword::Try::Deparse -MDevel::Cover=-select_re,'^/lib',+ignore_re,lib/perlcritic/Perl/Critic/Policy,-coverage,statement,-db,cover_db$(COVERDB_SUFFIX),
 endif
 
 .PHONY: coverage
