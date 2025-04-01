@@ -1,5 +1,5 @@
-theme = community + openqa
-severity = 4
+theme = community + openqa + maintenance
+severity = 5
 include = strict ValuesAndExpressions::ProhibitInterpolationOfLiterals
 
 verbose = ::warning file=%f,line=%l,col=%c,title=%m - severity %s::[%p] %e\n
@@ -47,3 +47,29 @@ severity = 5
 # -- Superfluous use strict/warning.
 [OpenQA::RedundantStrictWarning]
 equivalent_modules = Test::Most
+severity = 4
+
+[TooMuchCode::ProhibitUnusedImport]
+severity = 5
+
+[TooMuchCode::ProhibitDuplicateSub]
+severity = 5
+
+[TooMuchCode::ProhibitExtraStricture]
+severity = 5
+
+[TooMuchCode::ProhibitUnusedInclude]
+severity = 5
+
+[ProhibitUnnecessaryUTF8Pragma]
+severity = 5
+
+[TooMuchCode::ProhibitLargeTryBlock]
+severity = 5
+
+[TooMuchCode::ProhibitExcessiveColons]
+severity = 5
+
+[TooMuchCode::ProhibitDuplicateSub]
+severity = 5
+
