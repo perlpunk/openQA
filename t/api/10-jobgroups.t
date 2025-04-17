@@ -112,7 +112,7 @@ subtest 'list job groups' => sub() {
                 sort_order => 0,
                 keep_logs_in_days => 30,
                 default_priority => 50,
-                carry_over_bugrefs => 1,
+                carry_over_bugrefs => 0,
                 exclusively_kept_asset_size => undef,
             }]);
 };
