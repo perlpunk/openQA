@@ -781,6 +781,8 @@ subtest 'finalize job results' => sub {
         TEST => 'minion',
     );
     my $job = $jobs->create_from_settings(\%settings);
+    my $group = $schema->resultset('JobGroups')->find(1002);
+    $job->update({group_id => 1002});
     my $child_job = $jobs->create_from_settings(\%settings);
     my @chained = (dependency => OpenQA::JobDependencies::Constants::CHAINED);
     $job_dependencies->create({child_job_id => $child_job->id, parent_job_id => $job->id, @chained});
@@ -801,6 +803,7 @@ subtest 'finalize job results' => sub {
     subtest 'successful run triggered via $job->done' => sub {
         my $a_txt = path($job->result_dir, 'a-0.txt')->spew('Foo');
         my $b_txt = path('t/data/14-module-b.txt')->copy_to($job->result_dir . '/b-0.txt');
+diag "###############################";
         $job->done;
         $_->discard_changes for ($job, $child_job);
         is($job->result, FAILED, 'job result is failed');

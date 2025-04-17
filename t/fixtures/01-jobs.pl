@@ -37,7 +37,8 @@ use Time::Seconds;
     JobGroups => {
         id => 1002,
         sort_order => 0,
-        name => 'opensuse test'
+        name => 'opensuse test',
+        carry_over_bugrefs => 0,
     },
     Jobs => {
         # job with empty value settings as default
