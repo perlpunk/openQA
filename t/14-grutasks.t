@@ -803,7 +803,7 @@ subtest 'finalize job results' => sub {
     subtest 'successful run triggered via $job->done' => sub {
         my $a_txt = path($job->result_dir, 'a-0.txt')->spew('Foo');
         my $b_txt = path('t/data/14-module-b.txt')->copy_to($job->result_dir . '/b-0.txt');
-diag "###############################";
+        diag "###############################";
         $job->done;
         $_->discard_changes for ($job, $child_job);
         is($job->result, FAILED, 'job result is failed');
