@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: apt-get update && apt-get install -y libperl-critic-toomuchcode-perl
 #      - run: make test-critic
-      - run: tools/perlcritic -v lib
+      - run: tools/perlcritic --verbose 7 lib
