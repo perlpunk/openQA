@@ -9,7 +9,6 @@ BEGIN { $ENV{MAGICK_THREAD_LIMIT} = 1; }
 use OpenQA::Needles;
 use OpenQA::Utils qw(:DEFAULT prjdir assetdir imagesdir);
 use File::Basename;
-use File::Spec;
 use File::Spec::Functions 'catfile';
 use Data::Dump 'pp';
 use Mojo::File 'path';
