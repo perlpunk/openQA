@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     name: "Perlcritic"
     container:
-      image: perldocker/perl-tester
+      image: perl:5.38-bookworm
     steps:
       - uses: actions/checkout@v4
+      - run: apt-get update && apt-get install -y libperl-critic-toomuchcode-perl
       - run: make test-critic
