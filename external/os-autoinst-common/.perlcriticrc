@@ -61,7 +61,7 @@ severity = 5
 [TooMuchCode::ProhibitUnusedInclude]
 severity = 5
 
-[ProhibitUnnecessaryUTF8Pragma]
+[TooMuchCode::ProhibitUnnecessaryUTF8Pragma]
 severity = 5
 
 [TooMuchCode::ProhibitLargeTryBlock]
