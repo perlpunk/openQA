@@ -5,7 +5,7 @@ package OpenQA::Parser::Format::TAP;
 use Mojo::Base 'OpenQA::Parser::Format::Base';
 
 # Translates to TAP -> openQA internal
-use Carp qw(croak confess);
+use Carp qw(confess);
 use OpenQA::Parser::Result::OpenQA;
 use TAP::Parser;
 

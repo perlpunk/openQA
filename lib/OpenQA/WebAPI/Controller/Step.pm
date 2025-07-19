@@ -31,9 +31,9 @@ use Encode 'decode_utf8';
 use Mojo::File 'path';
 use Mojo::URL;
 use Mojo::Util 'decode';
-use OpenQA::Needles qw(needle_temp_dir locate_needle);
+use OpenQA::Needles qw(locate_needle);
 use OpenQA::Utils qw(ensure_timestamp_appended find_bug_number needledir testcasedir
-  run_cmd_with_log run_cmd_with_log_return_error config_autocommit_enabled);
+  config_autocommit_enabled);
 use OpenQA::Jobs::Constants;
 use File::Basename;
 use File::Which 'which';

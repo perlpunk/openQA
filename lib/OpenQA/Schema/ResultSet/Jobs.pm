@@ -11,7 +11,7 @@ use File::Basename 'basename';
 use IPC::Run;
 use OpenQA::App;
 use OpenQA::Jobs::Constants;
-use OpenQA::Log qw(log_trace log_debug log_info);
+use OpenQA::Log qw(log_trace log_info);
 use OpenQA::Schema::Result::Jobs;
 use OpenQA::Schema::Result::JobDependencies;
 use OpenQA::Utils 'testcasedir';

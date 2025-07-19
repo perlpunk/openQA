@@ -8,7 +8,6 @@ use OpenQA::App;
 use OpenQA::Jobs::Constants;
 use OpenQA::Utils qw(find_labels find_flags find_bugref find_bugrefs);
 use OpenQA::Markdown qw(markdown_to_html);
-use List::Util qw(first);
 
 __PACKAGE__->load_components(qw(Core));
 __PACKAGE__->load_components(qw(InflateColumn::DateTime Timestamps));

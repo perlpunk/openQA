@@ -8,7 +8,7 @@ use OpenQA::JobSettings;
 use OpenQA::Log qw(log_error log_info log_debug log_warning get_channel_handle format_settings);
 use OpenQA::Utils
   qw(asset_type_from_setting base_host locate_asset looks_like_url_with_scheme testcasedir productdir needledir);
-use POSIX qw(:sys_wait_h strftime uname _exit);
+use POSIX qw(:sys_wait_h uname);
 use Mojo::JSON 'encode_json';    # booleans
 use Cpanel::JSON::XS ();
 use Fcntl;
@@ -290,7 +290,7 @@ sub engine_workit ($job, $callback) {
     session->reset;
     session->enable_subreaper;
 
-    my ($sysname, $hostname, $release, $version, $machine) = POSIX::uname();
+    my ($sysname, $hostname, $release, $version, $machine) = uname();
     log_info('+++ setup notes +++', channels => 'autoinst');
     log_info(sprintf("Running on $hostname:%d ($sysname $release $version $machine)", $instance),
         channels => 'autoinst');

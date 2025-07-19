@@ -9,7 +9,6 @@ use OpenQA::Markdown 'markdown_to_html';
 use OpenQA::JobGroupDefaults;
 use OpenQA::Jobs::Constants;
 use Class::Method::Modifiers;
-use OpenQA::Log qw(log_debug);
 use OpenQA::Utils qw(parse_tags_from_comments regex_match);
 use Date::Format 'time2str';
 use OpenQA::YAML 'dump_yaml';

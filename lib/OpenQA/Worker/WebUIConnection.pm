@@ -4,9 +4,9 @@
 package OpenQA::Worker::WebUIConnection;
 use Mojo::Base 'Mojo::EventEmitter', -signatures;
 
-use OpenQA::Log qw(log_error log_debug log_warning log_info);
+use OpenQA::Log qw(log_error log_debug log_warning);
 use OpenQA::Utils;
-use OpenQA::Constants qw(WEBSOCKET_API_VERSION WORKER_SR_API_FAILURE MIN_TIMER MAX_TIMER);
+use OpenQA::Constants qw(WORKER_SR_API_FAILURE MIN_TIMER MAX_TIMER);
 use OpenQA::Worker::CommandHandler;
 
 use Mojo::IOLoop;

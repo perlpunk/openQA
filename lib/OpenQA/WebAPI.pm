@@ -8,7 +8,7 @@ use OpenQA::Assets;
 use OpenQA::Schema;
 use OpenQA::WebAPI::Plugin::Helpers;
 use OpenQA::Log qw(setup_log log_debug log_error);
-use OpenQA::Utils qw(detect_current_version service_port);
+use OpenQA::Utils qw(service_port);
 use OpenQA::Setup;
 use OpenQA::WebAPI::Description qw(get_pod_from_controllers set_api_desc);
 use Mojo::File 'path';

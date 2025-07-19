@@ -7,7 +7,6 @@ use Mojo::Base 'Mojolicious', -signatures;
 use OpenQA::Schema;
 use OpenQA::Log 'setup_log';
 use OpenQA::Setup;
-use OpenQA::Utils qw(service_port);
 
 has secrets => sub { shift->schema->read_application_secrets };
 

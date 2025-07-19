@@ -3,7 +3,7 @@
 
 package OpenQA::CLI::schedule;
 use Mojo::Base 'OpenQA::CLI::monitor', -signatures;
-use Mojo::Util qw(encode getopt);
+use Mojo::Util qw(getopt);
 use Term::ANSIColor qw(colored);
 
 has description => 'Schedules a set of jobs (via "isos post" creating a schedule product)';

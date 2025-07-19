@@ -7,7 +7,7 @@ use Mojo::Base -base, -signatures;
 use Mojo::Util 'trim';
 use Cwd 'abs_path';
 use Mojo::File 'path';
-use OpenQA::Utils qw(run_cmd_with_log_return_error run_cmd_with_log config_autocommit_enabled);
+use OpenQA::Utils qw(run_cmd_with_log_return_error config_autocommit_enabled);
 use OpenQA::App;
 use Feature::Compat::Try;
 

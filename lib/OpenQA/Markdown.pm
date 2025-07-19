@@ -7,6 +7,7 @@ use OpenQA::App;
 
 use Exporter 'import';
 use Regexp::Common 'URI';
+## no critic (TooMuchCode::ProhibitUnusedImport)
 use OpenQA::Utils qw(BUGREF_REGEX UNCONSTRAINED_BUGREF_REGEX LABEL_REGEX FLAG_REGEX);
 use OpenQA::Constants qw(FRAGMENT_REGEX);
 use CommonMark;

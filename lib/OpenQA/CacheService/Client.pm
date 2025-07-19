@@ -14,7 +14,7 @@ use Socket qw(AF_INET IPPROTO_TCP SOCK_STREAM pack_sockaddr_in inet_aton);
 use Mojo::URL;
 use Mojo::UserAgent;
 use Mojo::File 'path';
-use Regexp::Common qw(net);
+use Regexp::Common qw(net);    ## no critic (TooMuchCode::ProhibitUnusedImport)
 
 # Define sensible defaults to cover even a restarting openQA webUI host being
 # down for up to 5m

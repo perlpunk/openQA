@@ -6,7 +6,7 @@ package OpenQA::BuildResults;
 use Mojo::Base -strict, -signatures;
 
 use OpenQA::Jobs::Constants;
-use OpenQA::Constants qw(BUILD_SORT_BY_NAME BUILD_SORT_BY_NEWEST_JOB BUILD_SORT_BY_OLDEST_JOB);
+use OpenQA::Constants qw(BUILD_SORT_BY_NAME BUILD_SORT_BY_OLDEST_JOB);
 use OpenQA::Schema::Result::Jobs;
 use OpenQA::Utils;
 use OpenQA::Log qw(log_error);

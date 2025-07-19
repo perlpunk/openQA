@@ -7,7 +7,7 @@ use Mojo::Base 'Mojolicious';
 use Mojo::Server::Daemon;
 use Mojo::IOLoop;
 use OpenQA::Setup;
-use OpenQA::Log qw(log_debug log_warning log_info setup_log);
+use OpenQA::Log qw(log_debug setup_log);
 use OpenQA::WebSockets::Model::Status;
 use List::Util qw(max);
 

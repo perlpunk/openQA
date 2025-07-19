@@ -6,7 +6,7 @@ use Mojo::Base 'OpenQA::Parser::Format::JUnit';
 
 # Translates to JSON LTP format -> LTP internal representation
 # The parser results will be a collection of OpenQA::Parser::Result::LTP::Test
-use Carp qw(croak confess);
+use Carp qw(confess);
 use Mojo::JSON;
 use Storable 'dclone';
 

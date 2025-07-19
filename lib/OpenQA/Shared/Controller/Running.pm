@@ -6,10 +6,10 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 
 use Mojo::Util 'b64_encode';
 use Mojo::File 'path';
-use Mojo::JSON qw(encode_json decode_json);
+use Mojo::JSON qw(encode_json);
 use Feature::Compat::Try;
 use OpenQA::Constants qw(WORKER_COMMAND_LIVELOG_STOP WORKER_COMMAND_LIVELOG_START);
-use OpenQA::Log qw(log_debug log_error);
+use OpenQA::Log qw(log_debug);
 use OpenQA::Utils;
 use OpenQA::WebSockets::Client;
 use OpenQA::Jobs::Constants;

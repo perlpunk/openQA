@@ -5,7 +5,7 @@ package OpenQA::Parser::Format::JUnit;
 use Mojo::Base 'OpenQA::Parser::Format::Base';
 
 # Translates to JUnit -> openQA internal
-use Carp qw(croak confess);
+use Carp qw(confess);
 use OpenQA::Parser::Result::OpenQA;
 use Mojo::DOM;
 

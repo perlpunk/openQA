@@ -13,7 +13,7 @@ use OpenQA::Log qw(log_info log_error);
 use OpenQA::Utils;
 use Date::Format;
 use File::Basename;
-use File::Spec::Functions qw(catfile splitpath);
+use File::Spec::Functions qw(catfile);
 use File::Path 'remove_tree';
 use Mojo::UserAgent;
 use Mojo::URL;

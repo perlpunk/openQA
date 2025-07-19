@@ -29,7 +29,7 @@ use DBIx::Class::Timestamps 'now';
 use File::Temp 'tempdir';
 use Mojo::Collection;
 use Mojo::File qw(tempfile path);
-use Mojo::JSON qw(encode_json decode_json);
+use Mojo::JSON qw(decode_json);
 use Data::Dump 'dump';
 use Text::Diff;
 use OpenQA::File;

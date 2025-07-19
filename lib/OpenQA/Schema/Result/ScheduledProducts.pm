@@ -12,7 +12,7 @@ use Exporter 'import';
 use File::Basename;
 use Feature::Compat::Try;
 use OpenQA::App;
-use OpenQA::Log qw(log_debug log_warning log_error);
+use OpenQA::Log qw(log_debug log_warning);
 use OpenQA::Utils;
 use OpenQA::JobSettings;
 use OpenQA::Jobs::Constants;

@@ -7,7 +7,7 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::ByteStream;
 use OpenQA::Constants qw(JOBS_OVERVIEW_SEARCH_CRITERIA);
 use OpenQA::Schema;
-use OpenQA::Utils qw(bugurl human_readable_size render_escaped_refs href_to_bugref);
+use OpenQA::Utils qw(bugurl human_readable_size render_escaped_refs);
 use OpenQA::Events;
 use OpenQA::Jobs::Constants qw(EXECUTION_STATES PRE_EXECUTION_STATES ABORTED_RESULTS FAILED NOT_COMPLETE_RESULTS);
 use Text::Glob qw(glob_to_regex_string);
