@@ -1,0 +1,104 @@
+openapi: 3.1.1
+info:
+  title: OpenQA API
+  version: 1.2.3
+servers:
+  - url: /api/v1
+
+components:
+ securitySchemes:
+   apiKey:
+     name: Authorization
+     in: header
+     type: apiKey
+
+paths:
+
+  /jobs/{jobid}:
+    description: Retrieve job
+    parameters:
+    - &jobid
+      name: jobid
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [ job ]
+      x-mojo-name: apiv1_job
+      x-mojo-to: job#show
+      parameters:
+      - name: follow
+        in: query
+        schema:
+          type: integer
+          enum: [0, 1]
+      responses:
+        200:
+          description: foo
+
+  /jobs/{jobid}/prio:
+    description: Retrieve job
+    parameters:
+    - *jobid
+    post:
+      tags: [ job ]
+      x-mojo-name: apiv1_job_prio
+      x-mojo-to: job#prio
+      parameters:
+      - name: prio
+        in: query
+        schema:
+          type: integer
+
+  /jobs/{jobid}/details:
+    description: Retrieve job with details (logs, testresults)
+    parameters:
+    - *jobid
+    get:
+      tags: [ job ]
+      x-mojo-name: apiv1_job_details
+      x-mojo-to: job#show_details
+      responses:
+        200:
+          description: foo
+
+  /job_groups/{group_id}:
+    description: Retrieve Job Group
+    parameters:
+    - &group_id
+      name: group_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [ jobgroup ]
+      x-mojo-name: apiv1_get_job_group
+      x-mojo-to: job_group#list
+      responses:
+        200:
+          description: foo
+
+  /job_groups:
+    post:
+      tags: [ jobgroup ]
+      security: &apikey
+        - apiKey: []
+      x-mojo-name: apiv1_post_job_group
+      x-mojo-to: job_group#create
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required: [ name ]
+              properties:
+                name:
+                  type: string
+                  pattern: ^(?!\s*$).+
+                size_limit_gb:
+                  type: integer
+      responses:
+        200:
+          description: foo
+

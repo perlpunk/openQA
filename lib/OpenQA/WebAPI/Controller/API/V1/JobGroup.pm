@@ -93,15 +93,14 @@ create or update a job group via DBIx.
 
 =cut
 
-sub load_properties ($self) {
-
+sub load_properties ($self, $c = undef) {
     if (my $cached_properties = $self->{cached_properties}) {
         return $cached_properties;
     }
 
     my %properties;
     for my $param ($self->resultset->result_source->columns) {
-        my $value = $self->validation->param($param);
+        my $value = $c->param($param);
         next unless defined $value;
         if ($param eq 'parent_id') {
             $properties{$param} = ($value eq 'none') ? undef : $value;
@@ -225,23 +224,25 @@ Returns a 400 code on error or a 500 code if the group already exists.
 =cut
 
 sub create ($self) {
-    my $validation = $self->validation;
-    $validation->required('name')->like(qr/^(?!\s*$).+/);
-    $self->_validate_common_properties;
-    return $self->reply->validation_error({format => 'json'}) if $validation->has_error;
+    my $c = shift->openapi->valid_input or return;
+#    my $validation = $self->validation;
+#    $validation->required('name')->like(qr/^(?!\s*$).+/);
+#    $self->_validate_common_properties;
+#    return $self->reply->validation_error({format => 'json'}) if $validation->has_error;
 
-    my $check = $self->check_top_level_group;
+    my $name = $c->param('name');
+    my $check = 0;# = $self->check_top_level_group;
     if ($check != 0) {
         return $self->render(
             json => {
-                error => 'Unable to create group with existing name ' . $validation->param('name'),
+                error => 'Unable to create group with existing name ' . $c->param('name'),
                 already_exists => Mojo::JSON->true
             },
             status => 500
         );
     }
 
-    my $properties = $self->load_properties;
+    my $properties = $self->load_properties($c);
     return undef unless $self->_check_keep_logs_and_results($properties);
     my $id;
     try { $id = $self->resultset->create($properties)->id }

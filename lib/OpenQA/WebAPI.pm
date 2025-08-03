@@ -25,6 +25,29 @@ sub startup ($self) {
     push @{$self->plugins->namespaces}, 'OpenQA::Shared::Plugin';
     $self->plugin('SharedHelpers');
 
+    if (1) {
+        $self->plugin(
+            OpenAPI => {
+              url => $self->home->rel_file('public/openapi.yaml'),
+                security => {
+                    apiKey => sub {
+                        my ($c, $definition, $scopes, $cb) = @_;
+                        if (($c->req->headers->authorization // '') =~ /^Bearer\s+(.+)$/) {
+                            my $token = $1;
+                            return $c->$cb();
+                        }
+                        else {
+                            return $c->$cb('Api Key not present');
+                        }
+                    }
+                }
+            },
+        );
+        push @{$self->app->static()->paths()}, $self->home->rel_file('swagger');
+        push @{$self->app->renderer()->paths()}, $self->home->rel_file('swagger');
+    }
+
+
     # Provide help to users early to prevent failing later on misconfigurations
     # note: Loading plugins for the current configuration so the help of commands provided by plugins is
     #       available as well.
@@ -52,7 +75,7 @@ sub startup ($self) {
     OpenQA::Schema->singleton;
 
     # Some controllers are shared between openQA micro services
-    my $r = $self->routes->namespaces(['OpenQA::Shared::Controller', 'OpenQA::WebAPI::Controller', 'OpenQA::WebAPI']);
+    my $r = $self->routes->namespaces([qw(OpenQA::Shared::Controller OpenQA::WebAPI::Controller OpenQA::WebAPI OpenQA::WebAPI::Controller::API::V1)]);
 
     # register basic routes
     my $logged_in = $r->under('/')->to('session#ensure_user');
@@ -203,6 +226,7 @@ sub startup ($self) {
     $r->get('/dashboard_build_results' => [format => ['json', 'html']])->name('dashboard_build_results')
       ->to('main#dashboard_build_results', format => undef);
     $r->get('/api_help' => sub ($c) { $c->render('admin/api_help') })->name('api_help');
+    $r->get('/swagger' => sub ($c) { $c->render('swagger') })->name('swagger');
 
     # Default route
     $r->get('/' => sub ($c) { $c->render('main/index') })->name('index');
@@ -298,11 +322,9 @@ sub startup ($self) {
 
     # api/v1/job_groups
     $api_public_r->get('/job_groups')->name('apiv1_list_job_groups')->to('job_group#list');
-    $api_public_r->get('/job_groups/<group_id:num>')->name('apiv1_get_job_group')->to('job_group#list');
     $api_public_r->get('/job_groups/<group_id:num>/jobs')->name('apiv1_get_job_group_jobs')->to('job_group#list_jobs');
     $api_public_r->get('/job_groups/<group_id:num>/build_results')->name('apiv1_get_job_group_jobs')
       ->to('job_group#build_results');
-    $api_ra->post('/job_groups')->name('apiv1_post_job_group')->to('job_group#create');
     $api_ra->put('/job_groups/<group_id:num>')->name('apiv1_put_job_group')->to('job_group#update');
     $api_ra->delete('/job_groups/<group_id:num>')->name('apiv1_delete_job_group')->to('job_group#delete');
 
@@ -325,12 +347,9 @@ sub startup ($self) {
 
     my $job_r = $api_ro->any('/jobs/<jobid:num>');
     push @api_routes, $job_r;
-    $api_public_r->any('/jobs/<jobid:num>')->name('apiv1_job')->to('job#show');
     $api_public_r->get('/experimental/jobs/<jobid:num>/status')->name('apiv1_get_status')->to('job#get_status');
-    $api_public_r->any('/jobs/<jobid:num>/details')->name('apiv1_job')->to('job#show', details => 1);
     $job_r->put('/')->name('apiv1_put_job')->to('job#update');
     $job_r->delete('/')->name('apiv1_delete_job')->to('job#destroy');
-    $job_r->post('/prio')->name('apiv1_job_prio')->to('job#prio');
     $job_r->post('/set_done')->name('apiv1_set_done')->to('job#done');
     $job_r->post('/status')->name('apiv1_update_status')->to('job#update_status');
     $job_r->post('/artefact')->name('apiv1_create_artefact')->to('job#create_artefact');
