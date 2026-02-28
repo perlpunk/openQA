@@ -20,8 +20,12 @@ use IO::Socket::INET;
 use File::Path qw(make_path remove_tree);
 use Module::Load::Conditional qw(can_load);
 
-my $folder = "cover_db$EV{COVERDB_SUFFIX}";
-system "find $folder";
+{
+    no warnings;
+    my $folder = "cover_db$ENV{COVERDB_SUFFIX}";
+    my $out = qx{find $folder};
+    diag $out;
+}
 
 my $test_case = OpenQA::Test::Case->new;
 my $schema_name = OpenQA::Test::Database::generate_schema_name;
