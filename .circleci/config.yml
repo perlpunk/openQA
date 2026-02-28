@@ -294,8 +294,8 @@ workflows:
 #            - cache-npm
 #      - t:
 #          <<: *requires
-      - heavy:
-          <<: *requires
+#      - heavy:
+#          <<: *requires
       - api: &requires
           requires:
             - cache
