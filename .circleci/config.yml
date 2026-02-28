@@ -319,9 +319,9 @@ workflows:
             - heavy
             - api
             - ui
-            - unstable
-            - fullstack
-            - fullstack-unstable
+#            - unstable
+#            - fullstack
+#            - fullstack-unstable
       - build-docs:
           <<: *requires
 
@@ -345,6 +345,6 @@ workflows:
           <<: *requires
       - dependencies-pr:
           context: GitHub
-      - build-docs-nightly:
-          context: GitHub
-          <<: *requires_fullstack
+#      - build-docs-nightly:
+#          context: GitHub
+#          <<: *requires_fullstack
