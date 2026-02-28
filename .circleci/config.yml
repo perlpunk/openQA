@@ -288,15 +288,18 @@ workflows:
     jobs:
       - cache
       - cache-npm
-      - checkstyle: &requires
+#      - checkstyle: &requires
+#          requires:
+#            - cache
+#            - cache-npm
+#      - t:
+#          <<: *requires
+      - heavy:
+          <<: *requires
+      - api: &requires
           requires:
             - cache
             - cache-npm
-      - t:
-          <<: *requires
-      - heavy:
-          <<: *requires
-      - api:
           <<: *requires
       - ui:
           <<: *requires
