@@ -24,7 +24,7 @@ use Module::Load::Conditional qw(can_load);
     no warnings;
     my $folder = "cover_db$ENV{COVERDB_SUFFIX}";
     my $out = qx{find $folder};
-    diag $out;
+#    diag $out;
 }
 
 my $test_case = OpenQA::Test::Case->new;
