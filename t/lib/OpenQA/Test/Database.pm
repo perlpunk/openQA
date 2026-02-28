@@ -104,6 +104,7 @@ sub insert_fixtures ($self, $schema, $fixtures_glob = '*.pl') {
 sub disconnect ($schema) {
     my $dbh = $schema->storage->dbh;
     if (my $search_path = $schema->search_path_for_tests) { $dbh->do("drop schema $search_path") }
+    die __PACKAGE__.':'.__LINE__.": !!!!!!!!!!!!!!!!!\n";
     return $dbh->disconnect;
 }
 
