@@ -318,8 +318,8 @@ workflows:
       - codecov:
           context: Codecov
           requires:
-            - t
-            - heavy
+#            - t
+#            - heavy
             - api
             - ui
 #            - unstable
