@@ -104,11 +104,11 @@ images:
       HELM_TEST: 0
 
   - &base
-    image: registry.opensuse.org/devel/openqa/ci/containers/base:latest
+    image: ghcr.io/perlpunk/openqa_ci_base
     <<: *docker_config
 
   - &dependency_bot
-    image: registry.opensuse.org/devel/openqa/ci/containers/base:latest
+    image: ghcr.io/perlpunk/openqa_ci_base
     environment:
       COMMIT_AUTHOR_EMAIL: skynet@open.qa
 
