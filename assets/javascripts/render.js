@@ -184,9 +184,11 @@ function renderModuleRow(module, snippets) {
       box.push(E('span', [content], {class: 'resborder ' + resborder}));
     }
     if (step.text && title !== 'Soft Failed') {
+      const sourceLink = E('a', ['log'], {href: window.location.pathname + '/logfile?filename=autoinst-log.txt&filter=[step:' + module.category + ':' + module.name + ':' + step.num + ']'});
       const stepActions = E('span', [], {class: 'step_actions', style: 'float: right'});
       stepActions.innerHTML = renderTemplate(snippets.bug_actions, {MODULE: module.name, STEP: step.num});
       const textresult = E('pre', [textData]);
+      stepActions.prepend(sourceLink);
       let html = stepActions.outerHTML;
       html += textresult.outerHTML;
       const txt = escape(html);
