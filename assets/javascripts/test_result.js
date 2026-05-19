@@ -702,6 +702,15 @@ function showLogLines(logFileElement, lines, viaSearchBox = false) {
       lineNumberLinkElement.onclick();
     }
     lineContentElement.innerHTML = ansiToHtml(line);
+    const step_re = new RegExp(' \[step:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[0-9]+\] ');
+    const baseUrl = 'https://github.com/os-autoinst/os-autoinst-distri-openQA/blob/master/';
+    const source_re = /(?<= )(([a-zA-Z0-9_\/.-]+\.p[my])):(\d+)/g;
+    const found = lineContentElement.innerHTML.match(step_re);
+    if (found) {
+      lineContentElement.innerHTML = lineContentElement.innerHTML.replace(source_re, (match, filePath, executionMatch, lineNumber) => {
+        return `<a href="${baseUrl}${filePath}#L${lineNumber}" target="_blank">${filePath}:${lineNumber}</a>`;
+      });
+    }
     lineNumberElement.appendChild(lineNumberLinkElement);
     lineElement.append(lineNumberElement, lineContentElement);
     tableElement.appendChild(lineElement);
