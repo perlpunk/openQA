@@ -82,7 +82,9 @@ my $schema = OpenQA::Test::Database->new->create(schema_name => 'public', drop_s
 ok +Mojolicious::Commands->start_app('OpenQA::WebAPI', 'eval', '1+0'), 'assets are prefetched';
 my $mojoport = service_port 'websocket';
 $ws = create_websocket_server($mojoport, 0);
-my $driver = call_driver({mojoport => service_port 'webui'});
+my $port = service_port 'webui';
+diag "#################################################### port=$port";
+my $driver = call_driver({mojoport => $port});
 $livehandler = create_live_view_handler;
 
 my $resultdir = path($ENV{OPENQA_BASEDIR}, 'openqa', 'testresults')->make_path;

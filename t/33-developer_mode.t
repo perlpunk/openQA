@@ -81,6 +81,7 @@ ok +Mojolicious::Commands->start_app('OpenQA::WebAPI', 'eval', '1+0');
 
 # start Selenium test driver and other daemons
 my $port = service_port 'webui';
+diag "#################################################### port=$port";
 my $driver = call_driver({mojoport => $port});
 $ws = create_websocket_server(undef, 0);
 $scheduler = create_scheduler;
