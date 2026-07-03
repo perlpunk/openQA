@@ -119,7 +119,7 @@ sub check_scheduled_job_and_wait_for_free_worker ($worker_class) {
     my ($elapsed, $free_workers) = (0, []);
     for (; $elapsed <= $setup_timeout; $elapsed += sleep $setup_poll_interval) {
        $free_workers = OpenQA::Scheduler::Model::Jobs::determine_free_workers();
-        my $has_matching_worker = first {
+        my $has_matching_worker = grep {
             $_->check_class($worker_class)
         }
         @$free_workers;
