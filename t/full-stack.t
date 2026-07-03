@@ -26,7 +26,7 @@ BEGIN {
 
 use Test::Warnings ':report_warnings';
 use Mojo::Base -signatures;
-use List::Util ();
+use List::Util qw(first);
 use Test::Mojo;
 use Test::MockModule;
 use autodie ':all';
@@ -119,7 +119,7 @@ sub check_scheduled_job_and_wait_for_free_worker ($worker_class) {
     my ($elapsed, $free_workers) = (0, []);
     for (; $elapsed <= $setup_timeout; $elapsed += sleep $setup_poll_interval) {
        $free_workers = OpenQA::Scheduler::Model::Jobs::determine_free_workers();
-        my $has_matching_worker = List::Util::any {
+        my $has_matching_worker = first {
             $_->check_class($worker_class)
         }
         @$free_workers;
