@@ -57,3 +57,22 @@ subtest 'warnings in sub processes are fatal test failures' => sub {
 };
 
 done_testing();
+
+my $x = 0;
+if ($x) {
+    pass "something 1";
+    pass "something 2";
+    pass "something 3";
+    pass "something 4";
+    pass "something 5";
+    pass "something 6";
+    pass "something 7";
+    pass "something 8";
+    pass "something 9";
+    pass "something 10";
+    pass "something 11";
+    pass "something 12";
+    pass "something 13";
+    pass "something 14";
+    pass "something 15";
+}

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+input_file=$1
+limit=${2:-10}
+
+declare -i counter=0
+
+while read -r file line; do
+    [[ $line -eq 0 ]] && continue
+    if [[ -f "$file" ]]; then
+        content=$(sed -n "${line}p" "$file")
+        echo "$file:$line: $content"
+        counter+=1
+        if [[ $counter -ge $limit ]]; then
+            echo "Reached limit of $limit printed lines. Stopping." >&2
+            break
+        fi
+    else
+        echo "Warning: File '$file' not found." >&2
+    fi
+done < <(jq -r '.coverage | to_entries[] | .key as $file | .value | to_entries[] | select(.value == 0) | "\($file) \(.key + 0)"' "$input_file")
+
+if [[ $counter -gt 0 ]]; then
+    echo "$counter (or more) uncovered lines" >&2
+    exit 1
+fi
